@@ -62,7 +62,7 @@ int			ft_check_base(char *base, int size)
 	while (base[i])
 	{
 		if ((base[i] >= 0 &&  base[i] <= 47) || (base[i] >= 58 && base[i] <= 64)
-		|| (base[i] >= 91 && base[i] <= 96) || (base[i] >= 123 && base[i] <= 127))
+		|| (base[i] >= 91 && base[i] <= 96) || (base[i] >= 123))
 			return (0);
 		i++;
 	}

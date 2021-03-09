@@ -27,7 +27,11 @@ CC = 		gcc
 
 OBJS =		${SRCS:.c=.o}
 
-MLX_LNK =	-framework OPENGL -framework Appkit -lmlx -lft
+ifeq ($(OS),Darwin)
+	MLX_LNK = -framework OPENGL -framework Appkit -lmlx -lft
+else
+	MLX_LNK = -lm -lX11 -lXext
+endif
 
 MLX_DIR = 	../minilibx/minilibx_opengl_20191021/
 
