@@ -29,11 +29,11 @@ OBJS =		${SRCS:.c=.o}
 
 ifeq ($(OS),Darwin)
 	MLX_LNK = -framework OPENGL -framework Appkit -lmlx -lft
+	MLX_DIR = ../minilibx/minilibx_opengl_20191021/
 else
 	MLX_LNK = -lm -lX11 -lXext
+	MLX_DIR = ../minilibx/minilibx_linux/
 endif
-
-MLX_DIR = 	../minilibx/minilibx_opengl_20191021/
 
 L_DIR =		./libft/
 
