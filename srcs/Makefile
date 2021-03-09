@@ -10,40 +10,51 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Cub3D
+NAME = 		Cub3D
 
-SRCS = cub3d.c ft_move.c
+OS = 		${shell uname}
 
-OBJS = ${SRCS:.c=.o}
+SRCS = 		cub3d.c move.c def_world.c convert_endian.c image.c \
+			key_events.c store_color.c main.c raycasting.c textures.c \
+			create_map.c sprites.c init.c spawn.c free.c screenshot.c \
+			check_path.c get_info.c add_sprite.c cub3d_utils.c \
 
-CC = gcc
+HEADER = 	cub3d.h
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAG = 	-Wall -Wextra -Werror -I${HEADER}
 
-RM = rm -f
+CC = 		gcc
 
-MLXDIR = ../minilibx/minilibx_opengl_20191021/
+OBJS =		${SRCS:.c=.o}
 
-MLX_LNK = -lmlx -framework OPENGL -framework Appkit -Llibft -lft
+MLX_LNK =	-framework OPENGL -framework Appkit -lmlx -lft
 
-all : minilibx ${NAME}
+MLX_DIR = 	../minilibx/minilibx_opengl_20191021/
 
-.c.o:
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+L_DIR =		./libft/
+
+all: 		libft minilibx ${NAME}
 
 minilibx:
-			@make -C ${MLXDIR}
+			make -C ${MLX_DIR}
 
-$(NAME) : ${OBJS} minilibx
-			ar rc ${NAME} ${OBJS} ${MLX_LNK}
+libft:
+			make -C ${L_DIR}
 
-clean :
-		${RM} ${OBJS}
-		@make -C ${MLXDIR} clean
 
-fclean : clean
-			${RM} ${NAME}
+${NAME}:	${OBJS}
+			${CC} ${CFLAG} ${MLX_LNK} ${SRCS} -L${MLX_DIR} -L${L_DIR} -o ${NAME}
 
-re : fclean all
+clean:
+			rm -f ${OBJS}
+			make clean -C ${L_DIR}
+			make clean -C ${MLX_DIR}
 
-.PHONY : all clean fclean re
+fclean: 	clean
+			rm -f ${NAME}
+			make fclean -C ${L_DIR}
+			make clean -C ${MLX_DIR}
+
+re: 		fclean all
+
+.PHONY : 	all minilibx libft clean fclean re
