@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub.h"
 
 static void			ft_fill(t_calcul *calcul, t_save *save)
 {

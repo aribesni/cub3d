@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub.h"
 
 t_texture		*ft_new_texture(t_calcul *calcul, char *path)
 {

@@ -19,7 +19,7 @@ SRCS = 		cub3d.c move.c def_world.c convert_endian.c image.c \
 			create_map.c sprites.c init.c spawn.c free.c screenshot.c \
 			check_path.c get_info.c add_sprite.c cub3d_utils.c \
 
-HEADER = 	cub3d.h
+HEADER = 	cub.h
 
 CFLAG = 	-Wall -Wextra -Werror -I${HEADER}
 
@@ -27,12 +27,12 @@ CC = 		gcc
 
 OBJS =		${SRCS:.c=.o}
 
-ifeq ($(OS),Darwin)
-	MLX_LNK = -framework OPENGL -framework Appkit -lmlx -lft
-	MLX_DIR = ../minilibx/minilibx_opengl_20191021/
-else
+ifeq ($(OS),Linux)
 	MLX_LNK = -lm -lX11 -lXext
 	MLX_DIR = ../minilibx/minilibx_linux/
+else
+	MLX_LNK = -framework OPENGL -framework Appkit -lmlx -lft
+	MLX_DIR = ../minilibx/minilibx_opengl_20191021/
 endif
 
 L_DIR =		./libft/
@@ -44,7 +44,6 @@ minilibx:
 
 libft:
 			make -C ${L_DIR}
-
 
 ${NAME}:	${OBJS}
 			${CC} ${CFLAG} ${MLX_LNK} ${SRCS} -L${MLX_DIR} -L${L_DIR} -o ${NAME}

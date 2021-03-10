@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub.h"
 
 static void	ft_sort_sprites(double *dist, int *order, int count)
 {

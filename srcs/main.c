@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub.h"
 
 static void		ft_arg(t_calcul *calcul, int argc, char **argv)
 {

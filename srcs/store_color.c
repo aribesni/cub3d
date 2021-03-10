@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub.h"
 
 static void	pixel_tex(t_texture *tex, t_calcul *calcul)
 {

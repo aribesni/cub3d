@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub.h"
 
 void	ft_spawn(t_calcul *calcul, char c, double x, double y)
 {
