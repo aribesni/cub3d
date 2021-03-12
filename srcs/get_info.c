@@ -15,14 +15,10 @@
 void		ft_get_rgb(char *color, unsigned char *bit)
 {
 	*bit = ft_atoi(color);
-	if (color)
-	{
-		free(color);
-		color = NULL;
-	}
+	free(color);
 }
 
-void		ft_get_res(t_calcul *calcul, int i, int *j, char *color)
+void		ft_get_res(t_calcul *calcul, int i, int *j, char *res)
 {
 	int		k;
 
@@ -31,11 +27,11 @@ void		ft_get_res(t_calcul *calcul, int i, int *j, char *color)
 		*j = *j + 1;
 	while (calcul->read[i][*j] >= '0' && calcul->read[i][*j] <= '9')
 	{
-		color[k] = calcul->read[i][*j];
+		res[k] = calcul->read[i][*j];
 		*j = *j + 1;
 		k++;
 	}
-	color[k] = '\0';
+	res[k] = '\0';
 }
 
 void		ft_floor_ceiling(t_calcul *calcul, int i, int j, char c)

@@ -16,6 +16,8 @@ int		ft_init(t_calcul *calcul)
 {
 	calcul->w = ft_atoi(calcul->res_x);
 	calcul->h = ft_atoi(calcul->res_y);
+	free(calcul->res_x);
+	free(calcul->res_y);
 	calcul->movSpeed = 0.15;
 	calcul->rotSpeed = 0.5;
 	calcul->up = 0;

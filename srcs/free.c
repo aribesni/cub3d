@@ -23,6 +23,7 @@ int			ft_escape(t_calcul *calcul)
 	}
 	if (calcul->mlx)
 	{
+	//	mlx_destroy_display(calcul->mlx);
 		free(calcul->mlx);
 		calcul->mlx = NULL;
 	}
@@ -37,7 +38,7 @@ static void	ft_free_3(t_calcul *calcul)
 		free(calcul->path_sprite);
 		calcul->sprite = NULL;
 	}
-	if (calcul->color_temp)
+/*	if (calcul->color_temp)
 	{
 		free(calcul->color_temp);
 		calcul->color_temp = NULL;
@@ -47,7 +48,7 @@ static void	ft_free_3(t_calcul *calcul)
 		free(calcul->read);
 		calcul->read = NULL;
 	}
-	ft_free_img(calcul);
+*/	ft_free_img(calcul);
 	ft_free_tex(calcul);
 	ft_free_sprite(calcul);
 }
@@ -64,7 +65,7 @@ static void	ft_free_2(t_calcul *calcul)
 		free(calcul->path_tex_ea);
 		calcul->path_tex_ea = NULL;
 	}
-	if (calcul->res_x)
+/*	if (calcul->res_x)
 	{
 		free(calcul->res_x);
 		calcul->res_x = NULL;
@@ -74,7 +75,7 @@ static void	ft_free_2(t_calcul *calcul)
 		free(calcul->res_y);
 		calcul->res_y = NULL;
 	}
-	ft_free_3(calcul);
+*/	ft_free_3(calcul);
 }
 
 void		ft_free(t_calcul *calcul)
@@ -89,12 +90,12 @@ void		ft_free(t_calcul *calcul)
 		free(calcul->ZBuffer);
 		calcul->ZBuffer = NULL;
 	}
-	if (calcul->path_tex_no)
+/*	if (calcul->path_tex_no)
 	{
 		free(calcul->path_tex_no);
 		calcul->path_tex_no = NULL;
 	}
-	if (calcul->path_tex_so)
+*/	if (calcul->path_tex_so)
 	{
 		free(calcul->path_tex_so);
 		calcul->path_tex_so = NULL;
@@ -104,8 +105,8 @@ void		ft_free(t_calcul *calcul)
 
 void		ft_exit(t_calcul *calcul, char *str)
 {
+	(void)calcul;
 	ft_putendl(str);
-	if (calcul->mlx)
-		mlx_destroy_display(calcul->mlx);
+//	ft_free(calcul);
 	exit(1);
 }

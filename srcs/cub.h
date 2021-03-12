@@ -215,7 +215,7 @@ void				ft_free_img(t_calcul *calcul);
 void				ft_free_tex(t_calcul *calcul);
 void    			ft_free_sprite(t_calcul *calcul);
 void    			ft_get_path(t_calcul *calcul, int i, int j, char *path);
-void    			ft_get_res(t_calcul *calcul, int i, int *j, char *color);
+void    			ft_get_res(t_calcul *calcul, int i, int *j, char *res);
 void    			ft_get_rgb(char *color, unsigned char *bit);
 void				ft_key_events(t_calcul *calcul);
 void				ft_move(t_calcul *calcul);

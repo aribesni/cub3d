@@ -115,6 +115,7 @@ int			ft_create_map(t_calcul *calcul, int count)
 	if (!(calcul->map = (char**)malloc(sizeof(char*) * count)))
 		return (-1);
 	ft_fill_map(calcul, i, j, count);
+	free(calcul->read);
 	ft_cub3d(calcul);
 	return (0);
 }

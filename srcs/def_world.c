@@ -103,18 +103,14 @@ static void	ft_browse_info(t_calcul *calcul, int i, int j)
 	else if (calcul->read[i][j] == ' ' || calcul->read[i][j] == '\0')
 		j = 0;
 	else
-		ft_exit(calcul, "File Error!!");
+		ft_exit(calcul, "File Error");
 }
 
 void		ft_def_world(t_calcul *calcul)
 {
 	int		i;
-	int		j;
 
 	i = -1;
 	while (++i < calcul->start)
-	{
-		j = 0;
-		ft_browse_info(calcul, i, j);
-	}
+		ft_browse_info(calcul, i, 0);
 }
