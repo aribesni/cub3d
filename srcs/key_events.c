@@ -34,36 +34,36 @@ static int	ft_run(t_calcul *calcul)
 
 static int	ft_key_press(int keycode, t_calcul *calcul)
 {
-	if (keycode == 13)
+	if (keycode == UP)
 		calcul->up = true;
-	if (keycode == 1)
+	if (keycode == DOWN)
 		calcul->down = true;
-	if (keycode == 2)
+	if (keycode == RIGHT)
 		calcul->right = true;
-	if (keycode == 0)
+	if (keycode == LEFT)
 		calcul->left = true;
-	if (keycode == 123)
+	if (keycode == RTL)
 		calcul->rt_left = true;
-	if (keycode == 124)
+	if (keycode == RTR)
 		calcul->rt_right = true;
-	if (keycode == 53)
+	if (keycode == ESC)
 		ft_escape(calcul);
 	return (1);
 }
 
 static int	ft_key_release(int keycode, t_calcul *calcul)
 {
-	if (keycode == 13)
+	if (keycode == UP)
 		calcul->up = false;
-	if (keycode == 1)
+	if (keycode == DOWN)
 		calcul->down = false;
-	if (keycode == 2)
+	if (keycode == RIGHT)
 		calcul->right = false;
-	if (keycode == 0)
+	if (keycode == LEFT)
 		calcul->left = false;
-	if (keycode == 123)
+	if (keycode == RTL)
 		calcul->rt_left = false;
-	if (keycode == 124)
+	if (keycode == RTR)
 		calcul->rt_right = false;
 	return (1);
 }
@@ -80,7 +80,7 @@ void		ft_key_events(t_calcul *calcul)
 		mlx_hook(calcul->win, KEYPRESS, KEYPRESSMASK, ft_key_press, calcul);
 		mlx_hook(calcul->win, KEYRELEASE, KEYRELEASEMASK, ft_key_release,
 		calcul);
-		mlx_hook(calcul->win, 17, EXITMASK, ft_escape, calcul);
+		mlx_hook(calcul->win, EXITPRESS, EXITMASK, ft_escape, calcul);
 	}
 	mlx_loop_hook(calcul->mlx, ft_run, calcul);
 	mlx_loop(calcul->mlx);

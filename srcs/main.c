@@ -17,11 +17,11 @@ static void		ft_arg(t_calcul *calcul, int argc, char **argv)
 	if (argc >= 3)
 	{
 		if (argc > 3)
-			ft_exit("Too many arguments");
+			ft_exit(calcul, "Too many arguments");
 		if (ft_strcmp(argv[2], "-save") == 0)
 			calcul->save = 1;
 		else
-			ft_exit("Invalid Argument");
+			ft_exit(calcul, "Invalid Argument");
 	}
 }
 
@@ -31,13 +31,13 @@ static void		ft_read_file_3(t_calcul *calcul, int j, int count)
 
 	width = 0;
 	if (calcul->read[calcul->start][j] != '1')
-		ft_exit("File Error");
+		ft_exit(calcul, "File Error");
 	ft_def_world(calcul);
 	if (calcul->count_res != 1 || calcul->count_tex_no != 1 ||
 		calcul->count_tex_so != 1 || calcul->count_tex_ea != 1 ||
 		calcul->count_tex_we != 1 || calcul->count_sprite != 1 ||
 		calcul->count_c != 1 || calcul->count_f != 1)
-		ft_exit("File Error");
+		ft_exit(calcul, "File Error");
 	width = count - calcul->start;
 	calcul->mapW = --width;
 }
@@ -106,7 +106,7 @@ int				main(int argc, char **argv)
 	count = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		ft_exit("Invalid Argument");
+		ft_exit(&calcul, "Invalid Argument");
 	while (get_next_line(fd, &line))
 		count++;
 	count++;

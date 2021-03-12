@@ -17,7 +17,7 @@ void	ft_file_error(t_calcul *calcul, int i, int j)
 	while (calcul->read[i][j])
 	{
 		if (calcul->read[i][j] != ' ')
-			ft_exit("File Error");
+			ft_exit(calcul, "File Error");
 		j++;
 	}
 }

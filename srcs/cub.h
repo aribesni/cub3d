@@ -13,20 +13,51 @@
 #ifndef CUB3D
 # define CUB3D
 
-# include "../minilibx/minilibx_opengl_20191021/mlx.h"
 # include "./libft/libft.h"
+//# include "../minilibx/minilibx_linux/mlx.h"
+//# include "../minilibx/minilibx_opengl_20191021/mlx.h"
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
-
 # define true 1
 # define false 0
-# define KEYPRESS 2
-# define KEYRELEASE 3
-# define KEYPRESSMASK 0
-# define KEYRELEASEMASK 0
-# define EXITMASK 10001
+
+# ifdef __linux__
+
+#  include "../minilibx/minilibx_linux/mlx.h"
+#  define UP 119
+#  define DOWN 115
+#  define LEFT 97
+#  define RIGHT 100
+#  define RTL 65361
+#  define RTR 65363
+#  define ESC 65307
+#  define KEYPRESS 2
+#  define KEYRELEASE 3
+#  define KEYPRESSMASK (1L << 0)
+#  define KEYRELEASEMASK (1L << 1)
+#  define EXITPRESS 33
+#  define EXITMASK (1L << 17)
+
+# else
+
+#  include "../minilibx/minilibx_opengl_20191021/mlx.h"
+#  define UP 13
+#  define DOWN 1
+#  define LEFT 0
+#  define RIGHT 2
+#  define RTL 123
+#  define RTR 124
+#  define ESC 53
+#  define KEYPRESS 2
+#  define KEYRELEASE 3
+#  define KEYPRESSMASK 0
+#  define KEYRELEASEMASK 0
+#  define EXITPRESS 17
+#  define EXITMASK 10001
+
+# endif
 
 typedef struct		s_save
 {
@@ -172,11 +203,11 @@ typedef struct		s_calcul
 
 void				ft_add_sprite(t_calcul *calcul);
 void				ft_calculate(t_calcul *calcul);
-void    			ft_check_path(char *path);
+void    			ft_check_path(t_calcul *calcul, char *path);
 void				ft_convert_endian(t_calcul *calcul, char c);
 void				ft_cub3d(t_calcul *calcul);
 void				ft_def_world(t_calcul *calcul);
-void       			ft_exit(char *str);
+void       			ft_exit(t_calcul *calcul, char *str);
 void				ft_file_error(t_calcul *calcul, int i, int j);
 void				ft_floor_ceiling(t_calcul *calcul, int i, int j, char c);
 void    			ft_free(t_calcul *calcul);

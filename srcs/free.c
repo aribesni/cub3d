@@ -102,8 +102,10 @@ void		ft_free(t_calcul *calcul)
 	ft_free_2(calcul);
 }
 
-void		ft_exit(char *str)
+void		ft_exit(t_calcul *calcul, char *str)
 {
 	ft_putendl(str);
+	if (calcul->mlx)
+		mlx_destroy_display(calcul->mlx);
 	exit(1);
 }

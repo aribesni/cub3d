@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-void		ft_check_path(char *path)
+void		ft_check_path(t_calcul *calcul, char *path)
 {
 	int		fd;
 	int		i;
@@ -23,6 +23,6 @@ void		ft_check_path(char *path)
 		path[i - 3] != 'x' && path[i - 4] != '.'))
 	{
 		close(fd);
-		ft_exit("Path Error");
+		ft_exit(calcul, "Path Error");
 	}
 }

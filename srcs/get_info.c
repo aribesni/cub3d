@@ -73,7 +73,7 @@ void		ft_get_path(t_calcul *calcul, int i, int j, char *path)
 	while (calcul->read[i][j] != '.' && calcul->read[i][j])
 	{
 		if (calcul->read[i][j] != ' ')
-			ft_exit("File Error");
+			ft_exit(calcul, "File Error");
 		else
 			j++;
 	}
@@ -87,5 +87,5 @@ void		ft_get_path(t_calcul *calcul, int i, int j, char *path)
 	}
 	path[k] = '\0';
 	ft_file_error(calcul, i, j);
-	ft_check_path(path);
+	ft_check_path(calcul, path);
 }

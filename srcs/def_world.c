@@ -19,7 +19,7 @@ static void	ft_s(t_calcul *calcul, int i, int j)
 	size = ft_strlen(calcul->read[i] + j);
 	if (calcul->read[i][j] == 'S' && calcul->read[i][j + 1] != 'O' &&
 			calcul->read[i][j + 1] != ' ' && calcul->read[i][j + 1] != '.')
-		ft_exit("File Error");
+		ft_exit(calcul, "File Error");
 	else if (calcul->read[i][j] == 'S' && calcul->read[i][j + 1] == 'O' &&
 			calcul->count_tex_so == 0)
 	{
@@ -37,7 +37,7 @@ static void	ft_s(t_calcul *calcul, int i, int j)
 		calcul->count_sprite++;
 	}
 	else
-		ft_exit("File Error");
+		ft_exit(calcul, "File Error");
 }
 
 static void	ft_n_e_w(t_calcul *calcul, int i, int j, char c)
@@ -103,7 +103,7 @@ static void	ft_browse_info(t_calcul *calcul, int i, int j)
 	else if (calcul->read[i][j] == ' ' || calcul->read[i][j] == '\0')
 		j = 0;
 	else
-		ft_exit("File Error!!");
+		ft_exit(calcul, "File Error!!");
 }
 
 void		ft_def_world(t_calcul *calcul)

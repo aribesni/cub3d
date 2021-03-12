@@ -21,7 +21,7 @@ static void	ft_parse_map_3(t_calcul *calcul, int i, int j)
 			ft_spawn(calcul, calcul->read[calcul->start][j],
 			(double)i, (double)j);
 		else
-			ft_exit("Map Error");
+			ft_exit(calcul, "Map Error");
 		calcul->map[i][j] = '0';
 		calcul->count_pos++;
 	}
@@ -44,7 +44,7 @@ static void	ft_parse_map_2(t_calcul *calcul, int i, int j)
 			calcul->read[calcul->start][j - 1] == '\0' ||
 			calcul->read[calcul->start][j + 1] == ' ' ||
 			calcul->read[calcul->start][j + 1] == '\0')
-			ft_exit("Map Error");
+			ft_exit(calcul, "Map Error");
 	}
 	ft_parse_map_3(calcul, i, j);
 }
@@ -62,13 +62,13 @@ static void	ft_parse_map(t_calcul *calcul, int i, int j)
 			calcul->read[calcul->start][j - 1] != ' ' &&
 			calcul->read[calcul->start][j + 1] != '1' &&
 			calcul->read[calcul->start][j + 1] != ' '))
-			ft_exit("Map Error");
+			ft_exit(calcul, "Map Error");
 	}
 	if (calcul->map[i][j] != 'N' && calcul->map[i][j] != 'S' &&
 		calcul->map[i][j] != 'E' && calcul->map[i][j] != 'W' &&
 		calcul->map[i][j] != '0' && calcul->map[i][j] != '1' &&
 		calcul->map[i][j] != '2' && calcul->map[i][j] != ' ')
-		ft_exit("Map Error");
+		ft_exit(calcul, "Map Error");
 	ft_parse_map_2(calcul, i, j);
 }
 
@@ -87,7 +87,7 @@ static int	ft_fill_map(t_calcul *calcul, int i, int j, int count)
 			j++;
 		}
 		if (calcul->read[calcul->start][j] != '1')
-			ft_exit("Map Error");
+			ft_exit(calcul, "Map Error");
 		while (calcul->read[calcul->start][j])
 		{
 			calcul->map[i][j] = calcul->read[calcul->start][j];
