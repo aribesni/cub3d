@@ -39,15 +39,15 @@ void		ft_floor_ceiling(t_calcul *calcul, int i, int j, char c)
 	int		size;
 
 	size = ft_strlen(calcul->read[i] + j);
-	if (!(calcul->color_temp = (char*)malloc(sizeof(char) * size)))
+	if (!(calcul->color_temp = (char*)malloc(sizeof(char) * size + 1)))
 		return ;
 	ft_get_res(calcul, i, &j, calcul->color_temp);
 	ft_get_rgb(calcul->color_temp, &calcul->bit_1);
-	if (!(calcul->color_temp = (char*)malloc(sizeof(char) * size)))
+	if (!(calcul->color_temp = (char*)malloc(sizeof(char) * size + 1)))
 		return ;
 	ft_get_res(calcul, i, &j, calcul->color_temp);
 	ft_get_rgb(calcul->color_temp, &calcul->bit_2);
-	if (!(calcul->color_temp = (char*)malloc(sizeof(char) * size)))
+	if (!(calcul->color_temp = (char*)malloc(sizeof(char) * size + 1)))
 		return ;
 	ft_get_res(calcul, i, &j, calcul->color_temp);
 	ft_get_rgb(calcul->color_temp, &calcul->bit_3);

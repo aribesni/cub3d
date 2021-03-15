@@ -77,12 +77,12 @@ static int		ft_read_file(t_calcul *calcul, int fd, int count, char *line)
 
 	i = 0;
 	j = 0;
-	if (!(calcul->read = malloc(sizeof(char*) * count)))
+	if (!(calcul->read = malloc(sizeof(char*) * count + 1)))
 		return (-1);
 	while (i < count)
 	{
 		get_next_line(fd, &line);
-		if (!(calcul->read[i] = (char*)malloc(sizeof(char) * ft_strlen(line))))
+		if (!(calcul->read[i] = (char*)malloc(sizeof(char) * ft_strlen(line) + 1)))
 			return (-1);
 		while (j < ft_strlen(line))
 		{

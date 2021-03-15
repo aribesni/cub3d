@@ -23,7 +23,7 @@ int			ft_escape(t_calcul *calcul)
 	}
 	if (calcul->mlx)
 	{
-	//	mlx_destroy_display(calcul->mlx);
+		mlx_destroy_display(calcul->mlx);
 		free(calcul->mlx);
 		calcul->mlx = NULL;
 	}
