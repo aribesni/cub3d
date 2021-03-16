@@ -137,7 +137,6 @@ typedef struct		s_calcul
 	int 			drawEndX;
 	int 			stripe;
 	int				mapH;
-	int				mapW;
 	int				sp_count;
 	int				sp_x;
 	int				sp_y;

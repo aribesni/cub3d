@@ -76,6 +76,7 @@ static int	ft_fill_map(t_calcul *calcul, int i, int j, int count)
 {
 	int		size;
 
+	size = 0;
 	while (++i < count)
 	{
 		size = ft_strlen(calcul->read[calcul->start]);
@@ -109,7 +110,6 @@ int			ft_create_map(t_calcul *calcul, int count)
 	i = -1;
 	j = 0;
 	count -= calcul->start;
-	calcul->mapH = count;
 	calcul->sp_count = 0;
 	calcul->count_pos = 0;
 	if (!(calcul->map = (char**)malloc(sizeof(char*) * count + 1)))

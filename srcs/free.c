@@ -90,12 +90,12 @@ void		ft_free(t_calcul *calcul)
 		free(calcul->ZBuffer);
 		calcul->ZBuffer = NULL;
 	}
-/*	if (calcul->path_tex_no)
+	if (calcul->path_tex_no)
 	{
 		free(calcul->path_tex_no);
 		calcul->path_tex_no = NULL;
 	}
-*/	if (calcul->path_tex_so)
+	if (calcul->path_tex_so)
 	{
 		free(calcul->path_tex_so);
 		calcul->path_tex_so = NULL;

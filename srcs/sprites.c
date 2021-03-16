@@ -19,6 +19,8 @@ static void	ft_sort_sprites(double *dist, int *order, int count)
 	double	temp2;
 
 	i = 0;
+//	temp = 0;
+//	temp2 = 0.0;
 	while (i < count - 1)
 	{
 		if (dist[i] < dist[i + 1])
@@ -61,11 +63,12 @@ static void	ft_place_sprite(t_calcul *calcul)
 	int		y;
 
 	i = 0;
+	x = 0;
 	y = 0;
 	while (y < calcul->mapH)
 	{
 		x = 0;
-		while (x < calcul->mapW)
+		while (x < ft_strlen(calcul->map[y]))
 		{
 			if (calcul->map[y][x] == '2')
 			{

@@ -21,6 +21,7 @@ static void			ft_fill(t_calcul *calcul, t_save *save)
 
 	i = 0;
 	j = 0;
+	k = 0;
 	fd = open("save.bmp", O_CREAT | O_RDWR | O_APPEND, 0644);
 	while (j < calcul->h)
 	{

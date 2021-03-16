@@ -34,6 +34,7 @@ static void	ft_add_sprite_2(t_calcul *calcul)
 	int		y;
 	int		color_sp;
 
+	d = 0;
 	color_sp = 0;
 	y = calcul->drawStartY;
 	if (calcul->transY > 0 && calcul->stripe > 0 && calcul->stripe <

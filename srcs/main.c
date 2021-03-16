@@ -39,7 +39,7 @@ static void		ft_read_file_3(t_calcul *calcul, int j, int count)
 		calcul->count_c != 1 || calcul->count_f != 1)
 		ft_exit(calcul, "File Error");
 	width = count - calcul->start;
-	calcul->mapW = --width;
+	calcul->mapH = --width;
 }
 
 static void		ft_read_file_2(t_calcul *calcul, int count)

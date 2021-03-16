@@ -16,6 +16,7 @@ void		ft_texture(t_calcul *calcul)
 {
 	double	wallx;
 
+	wallx = 0.0;
 	if (calcul->side == 0)
 		wallx = calcul->rayPosY + calcul->perpWall * calcul->rayDirY;
 	else

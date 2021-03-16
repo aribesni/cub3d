@@ -16,7 +16,6 @@ void		ft_convert_endian(t_calcul *calcul, char c)
 {
 	int		temp;
 
-	temp = 0;
 	temp = calcul->bit_1 << 16;
 	temp = temp | calcul->bit_2 << 8;
 	temp = temp | calcul->bit_3;

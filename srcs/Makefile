@@ -19,9 +19,9 @@ SRCS = 		cub3d.c move.c def_world.c convert_endian.c image.c \
 			create_map.c sprites.c init.c spawn.c free.c screenshot.c \
 			check_path.c get_info.c add_sprite.c cub3d_utils.c \
 
-CFLAG = 	-Wall -Wextra -Werror -I ${HEADER}
+#CFLAG = 	-Wall -Wextra -Werror -I ${HEADER}
 
-#CFLAG = 	-Wall -Wextra -Werror
+CFLAG = 	-Wall -Wextra -Werror
 
 HEADER = cub.h
 
@@ -43,30 +43,30 @@ else
 	CC = gcc
 endif
 
-#all: 		${NAME}
+all: 		${NAME}
 
 L_DIR =		./libft/
 
-all: 		libft minilibx ${NAME}
+#all: 		libft minilibx ${NAME}
 
-#${LIBS}:
-#			make -C ${MLX_DIR}
-#			make -C ${L_DIR}
-
-#${NAME}:	${OBJS} ${LIBS}
-#			${CC} ${CFLAG} -o ${NAME} ${OBJS} ${MLX_LNK} ${LIBS}
-
-#.c.o:
-#			${CC} ${CFLAG} -I ./includes/ -c $< -o $@
-
-minilibx:
+${LIBS}:
 			make -C ${MLX_DIR}
-
-libft:
 			make -C ${L_DIR}
 
-${NAME}:	${OBJS}
-			${CC} ${CFLAG} ${MLX_LNK} ${SRCS} -L${MLX_DIR} -L${L_DIR} -o ${NAME}
+${NAME}:	${OBJS} ${LIBS}
+			${CC} ${CFLAG} -o ${NAME} ${OBJS} ${MLX_LNK} ${LIBS}
+
+.c.o:
+			${CC} ${CFLAG} -I ./includes/ -c $< -o $@
+
+#minilibx:
+			make -C ${MLX_DIR}
+
+#libft:
+			make -C ${L_DIR}
+
+#${NAME}:	${OBJS}
+#			${CC} ${CFLAG} ${MLX_LNK} ${SRCS} -L${MLX_DIR} -L${L_DIR} -o ${NAME}
 
 clean:
 			rm -f ${OBJS}
