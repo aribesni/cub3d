@@ -18,9 +18,12 @@ t_texture		*ft_new_texture(t_calcul *calcul, char *path)
 
 	if (!(tex = malloc(sizeof(t_texture))))
 		return (NULL);
+	tex->bpp = 0;
+	tex->endian = 0;
+	tex->size_line = 0;
 	tex->tex_ptr = mlx_xpm_file_to_image(calcul->mlx, path, &tex->width,
 	&tex->height);
-	tex->tex_data = (int *)mlx_get_data_addr(tex->tex_ptr, &tex->bpp,
+	tex->tex_data = (int*)mlx_get_data_addr(tex->tex_ptr, &tex->bpp,
 	&tex->size_line, &tex->endian);
 	tex->height = 64;
 	tex->width = 64;
@@ -33,8 +36,11 @@ t_image			*ft_new_image(t_calcul *calcul)
 
 	if (!(image = malloc(sizeof(t_image))))
 		return (NULL);
+	image->bpp = 0;
+	image->endian = 0;
+	image->size_line = 0;
 	image->img_ptr = mlx_new_image(calcul->mlx, calcul->w, calcul->h);
-	image->img_data = (int *)mlx_get_data_addr(image->img_ptr, &image->bpp,
+	image->img_data = (int*)mlx_get_data_addr(image->img_ptr, &image->bpp,
 	&image->size_line, &image->endian);
 	image->width = calcul->w;
 	image->height = calcul->h;

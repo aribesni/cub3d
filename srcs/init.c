@@ -14,10 +14,6 @@
 
 int		ft_init(t_calcul *calcul)
 {
-	calcul->w = ft_atoi(calcul->res_x);
-	calcul->h = ft_atoi(calcul->res_y);
-	free(calcul->res_x);
-	free(calcul->res_y);
 	calcul->win = NULL;
 	calcul->movSpeed = 0.15;
 	calcul->rotSpeed = 0.5;
@@ -34,10 +30,14 @@ int		ft_init(t_calcul *calcul)
 	calcul->stepY = 0;
 	calcul->side = 0;
 	calcul->texY = 0;
+	calcul->color = 0;
+	calcul->bit_1 = 0;
+	calcul->bit_2 = 0;
+	calcul->bit_3 = 0;
+	calcul->spScreenX = 0;
 	calcul->sideDistX = 0.0;
 	calcul->sideDistY = 0.0;
 	calcul->perpWall = 0.0;
-	if (!(calcul->ZBuffer = malloc(sizeof(double) * calcul->w)))
-		return (-1);
+	calcul->ZBuffer = NULL;
 	return (1);
 }

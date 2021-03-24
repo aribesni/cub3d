@@ -19,8 +19,8 @@ static void	ft_sort_sprites(double *dist, int *order, int count)
 	double	temp2;
 
 	i = 0;
-//	temp = 0;
-//	temp2 = 0.0;
+	temp = 0;
+	temp2 = 0.0;
 	while (i < count - 1)
 	{
 		if (dist[i] < dist[i + 1])

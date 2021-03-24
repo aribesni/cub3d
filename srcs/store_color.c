@@ -37,6 +37,7 @@ static void	pix_color(t_calcul *calcul)
 
 void		ft_set_color(t_image *image, unsigned int color, int p_x, int p_y)
 {
+//	ft_printf("sizeof image : %i\n", sizeof(image));
 	if (p_y >= image->height || p_x >= image->width || p_x < 0 || p_y < 0)
 		return ;
 	image->img_data[p_y * image->width + p_x] = color;

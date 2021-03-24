@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-static void	ft_calc_end_start(t_calcul *calcul)
+static void			ft_calc_end_start(t_calcul *calcul)
 {
 	if (calcul->drawStartY < 0)
 		calcul->drawStartY = 0;
@@ -28,11 +28,11 @@ static void	ft_calc_end_start(t_calcul *calcul)
 		calcul->drawEndX = calcul->w - 1;
 }
 
-static void	ft_add_sprite_2(t_calcul *calcul)
+static void			ft_add_sprite_2(t_calcul *calcul)
 {
-	int		d;
-	int		y;
-	int		color_sp;
+	int				d;
+	int				y;
+	unsigned int	color_sp;
 
 	d = 0;
 	color_sp = 0;
@@ -53,9 +53,9 @@ static void	ft_add_sprite_2(t_calcul *calcul)
 	}
 }
 
-static void	ft_sprite_calc(t_calcul *calcul, int i)
+static void			ft_sprite_calc(t_calcul *calcul, int i)
 {
-	double	inv;
+	double			inv;
 
 	calcul->spriteX = calcul->sprite[calcul->order[i]].x - calcul->posX;
 	calcul->spriteY = calcul->sprite[calcul->order[i]].y - calcul->posY;
@@ -72,9 +72,9 @@ static void	ft_sprite_calc(t_calcul *calcul, int i)
 	ft_calc_end_start(calcul);
 }
 
-void		ft_add_sprite(t_calcul *calcul)
+void				ft_add_sprite(t_calcul *calcul)
 {
-	int		i;
+	int				i;
 
 	i = 0;
 	while (i < calcul->sp_count)

@@ -14,19 +14,9 @@
 
 static int	ft_run(t_calcul *calcul)
 {
-	calcul->image = ft_new_image(calcul);
-	calcul->tex_no = ft_new_texture(calcul, calcul->path_tex_no);
-	calcul->tex_so = ft_new_texture(calcul, calcul->path_tex_so);
-	calcul->tex_ea = ft_new_texture(calcul, calcul->path_tex_ea);
-	calcul->tex_we = ft_new_texture(calcul, calcul->path_tex_we);
-	calcul->tex_sp = ft_new_texture(calcul, calcul->path_sprite);
+	
 	ft_move(calcul);
 	ft_calculate(calcul);
-	if (calcul->save == 1)
-	{
-		ft_screenshot(calcul);
-		ft_escape(calcul);
-	}
 	mlx_put_image_to_window(calcul->mlx, calcul->win, calcul->image->img_ptr,
 	0, 0);
 	return (1);
@@ -77,11 +67,13 @@ void		ft_key_events(t_calcul *calcul)
 	y = 0;
 	if (!(calcul->mlx = mlx_init()))
 		return ;
+	mlx_get_screen_size(calcul->mlx, &x, &y); // linux
+	calcul->w = (calcul->w > x) ? x : calcul->w; //
+	calcul->h = (calcul->h > y) ? y : calcul->h; //
+	if (!(calcul->ZBuffer = malloc(sizeof(double) * calcul->w)))
+		return ;
 	if (calcul->save == 0)
 	{
-		mlx_get_screen_size(calcul->mlx, &x, &y);
-		calcul->w = (calcul->w > x) ? x : calcul->w;
-		calcul->h = (calcul->h > y) ? y : calcul->h;
 		if (!(calcul->win = mlx_new_window(calcul->mlx, calcul->w,
 		calcul->h, "Cub3D")))
 			return ;
@@ -89,6 +81,18 @@ void		ft_key_events(t_calcul *calcul)
 		mlx_hook(calcul->win, KEYRELEASE, KEYRELEASEMASK, ft_key_release,
 		calcul);
 		mlx_hook(calcul->win, EXITPRESS, EXITMASK, ft_escape, calcul);
+	}
+	calcul->image = ft_new_image(calcul);
+	calcul->tex_no = ft_new_texture(calcul, calcul->path_tex_no);
+	calcul->tex_so = ft_new_texture(calcul, calcul->path_tex_so);
+	calcul->tex_ea = ft_new_texture(calcul, calcul->path_tex_ea);
+	calcul->tex_we = ft_new_texture(calcul, calcul->path_tex_we);
+	calcul->tex_sp = ft_new_texture(calcul, calcul->path_sprite);
+	if (calcul->save == 1)
+	{
+		ft_screenshot(calcul);
+		ft_free(calcul);
+		exit(1);
 	}
 	mlx_loop_hook(calcul->mlx, ft_run, calcul);
 	mlx_loop(calcul->mlx);

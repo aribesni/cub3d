@@ -106,16 +106,18 @@ int			ft_create_map(t_calcul *calcul, int count)
 {
 	int		i;
 	int		j;
+	int		size;
 
 	i = -1;
 	j = 0;
+	size = count;
 	count -= calcul->start;
 	calcul->sp_count = 0;
 	calcul->count_pos = 0;
-	if (!(calcul->map = (char**)malloc(sizeof(char*) * count + 1)))
+	if (!(calcul->map = (char**)malloc(sizeof(char*) * count)))
 		return (-1);
 	ft_fill_map(calcul, i, j, count);
-	free(calcul->read);
+	ft_free_tab(calcul->read, size);
 	ft_cub3d(calcul);
 	return (0);
 }

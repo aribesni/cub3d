@@ -23,7 +23,7 @@ SRCS = 		cub3d.c move.c def_world.c convert_endian.c image.c \
 
 CFLAG = 	-Wall -Wextra -Werror
 
-HEADER = cub.h
+#HEADER = cub.h
 
 #CC = gcc
 
@@ -60,10 +60,10 @@ ${NAME}:	${OBJS} ${LIBS}
 			${CC} ${CFLAG} -I ./includes/ -c $< -o $@
 
 #minilibx:
-			make -C ${MLX_DIR}
+#			make -C ${MLX_DIR}
 
 #libft:
-			make -C ${L_DIR}
+#			make -C ${L_DIR}
 
 #${NAME}:	${OBJS}
 #			${CC} ${CFLAG} ${MLX_LNK} ${SRCS} -L${MLX_DIR} -L${L_DIR} -o ${NAME}

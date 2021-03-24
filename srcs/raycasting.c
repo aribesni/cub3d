@@ -99,12 +99,12 @@ static void	ft_init_ray(t_calcul *calcul, int x)
 	calcul->hit = 0;
 }
 
-void		ft_calculate(t_calcul *calcul)
+int		ft_calculate(t_calcul *calcul)
 {
 	int		x;
 
 	x = 0;
-	while (x <= calcul->w)
+	while (x < calcul->w)
 	{
 		ft_init_ray(calcul, x);
 		ft_ray_direction(calcul);
@@ -116,4 +116,7 @@ void		ft_calculate(t_calcul *calcul)
 		x++;
 	}
 	ft_init_sprite(calcul);
+	if (calcul->save == 1)
+		return (1);
+	return (1);
 }

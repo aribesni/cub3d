@@ -79,6 +79,7 @@ int					ft_screenshot(t_calcul *calcul)
 		return (-1);
 	if (!(save->body = calloc(calcul->w * calcul->h, sizeof(int))))
 		return (-1);
+	ft_calculate(calcul);
 	ft_init_save(calcul, save);
 	ft_bzero(save->header, save->start);
 	ft_bzero(save->body, calcul->w * calcul->h);

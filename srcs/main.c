@@ -12,16 +12,28 @@
 
 #include "cub.h"
 
-static void		ft_arg(t_calcul *calcul, int argc, char **argv)
+static void		ft_arg(t_calcul *calcul, int argc, char **argv, int count)
 {
 	if (argc >= 3)
 	{
 		if (argc > 3)
+		{
+			ft_free_save(calcul);
+			ft_free_tab(calcul->read, count);
+			free(calcul->res_x);
+			free(calcul->res_y);
 			ft_exit(calcul, "Too many arguments");
+		}
 		if (ft_strcmp(argv[2], "-save") == 0)
 			calcul->save = 1;
 		else
+		{
+			ft_free_save(calcul);
+			ft_free_tab(calcul->read, count);
+			free(calcul->res_x);
+			free(calcul->res_y);
 			ft_exit(calcul, "Invalid Argument");
+		}
 	}
 }
 
@@ -77,7 +89,7 @@ static int		ft_read_file(t_calcul *calcul, int fd, int count, char *line)
 
 	i = 0;
 	j = 0;
-	if (!(calcul->read = malloc(sizeof(char*) * count + 1)))
+	if (!(calcul->read = malloc(sizeof(char*) * count)))
 		return (-1);
 	while (i < count)
 	{
@@ -89,6 +101,7 @@ static int		ft_read_file(t_calcul *calcul, int fd, int count, char *line)
 			calcul->read[i][j] = line[j];
 			j++;
 		}
+		free(line);
 		calcul->read[i][j] = '\0';
 		j = 0;
 		i++;
@@ -104,17 +117,27 @@ int				main(int argc, char **argv)
 	t_calcul	calcul;
 
 	count = 0;
+	if (argc == 1)
+		ft_exit(&calcul, "Missing Argument");
 	fd = open(argv[1], O_RDONLY);
+//	line = NULL;
+	ft_bzero(&calcul, sizeof(t_calcul));
+	calcul.color_c = 0;
+	calcul.color_f = 0;
+	ft_init(&calcul);
 	if (fd < 0)
 		ft_exit(&calcul, "Invalid Argument");
 	while (get_next_line(fd, &line))
+	{
 		count++;
-	count++;
+		free(line);
+	}
+	count += (line[0] == '\0') ? 0 : 1;
+	free(line);
 	fd = open(argv[1], O_RDONLY);
 	ft_read_file(&calcul, fd, count, line);
 	ft_read_file_2(&calcul, count);
-	ft_arg(&calcul, argc, argv);
+	ft_arg(&calcul, argc, argv, count);
 	ft_create_map(&calcul, count);
-	ft_free(&calcul);
 	return (0);
 }
