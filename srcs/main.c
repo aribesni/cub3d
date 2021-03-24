@@ -18,7 +18,7 @@ static void		ft_read_file_3(t_calcul *calcul, int j, int count)
 
 	width = 0;
 	if (calcul->read[calcul->start][j] != '1')
-		ft_exit("File Error");
+		ft_exit("Map Not Closed");
 	ft_def_world(calcul);
 	if (calcul->count_res != 1 || calcul->count_tex_no != 1 ||
 		calcul->count_tex_so != 1 || calcul->count_tex_ea != 1 ||

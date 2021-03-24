@@ -67,16 +67,16 @@ static void	ft_init_img(t_calcul *calcul)
 
 static void	ft_key_events(t_calcul *calcul)
 {
-//	int		x;
-//	int		y;
+	int		x;
+	int		y;
 
-//	x = 0;
-//	y = 0;
+	x = 0;
+	y = 0;
 	if (!(calcul->mlx = mlx_init()))
 		return ;
-//	mlx_get_screen_size(calcul->mlx, &x, &y); // linux
-//	calcul->w = (calcul->w > x) ? x : calcul->w; //
-//	calcul->h = (calcul->h > y) ? y : calcul->h; //
+	mlx_get_screen_size(calcul->mlx, &x, &y);
+	calcul->w = (calcul->w > x) ? x : calcul->w;
+	calcul->h = (calcul->h > y) ? y : calcul->h;
 	if (!(calcul->ZBuffer = malloc(sizeof(double) * calcul->w)))
 		return ;
 	if (calcul->save == 0)

@@ -23,7 +23,7 @@ void		ft_check_path(char *path)
 		path[i - 3] != 'x' && path[i - 4] != '.'))
 	{
 		close(fd);
-		ft_exit("Path Error");
+		ft_exit("File Error : Path Error");
 	}
 }
 
@@ -59,7 +59,7 @@ void		ft_file_error(t_calcul *calcul, int i, int j)
 	while (calcul->read[i][j])
 	{
 		if (calcul->read[i][j] != ' ')
-			ft_exit("File Error");
+			ft_exit("File Error : Invalid Character");
 		j++;
 	}
 }

@@ -59,7 +59,7 @@ static void	ft_get_path_2(t_calcul *calcul, int *i, int *j)
 	while (calcul->read[*i][*j] != '.' && calcul->read[*i][*j])
 	{
 		if (calcul->read[*i][*j] != ' ')
-			ft_exit("File Error");
+			ft_exit("File Error : Invalid Character");
 		else
 			*j = *j + 1;
 	}

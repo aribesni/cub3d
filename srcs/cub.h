@@ -13,9 +13,7 @@
 #ifndef CUB3D
 # define CUB3D
 
-# include "./libft/libft.h"
-//# include "../minilibx/minilibx_linux/mlx.h"
-//# include "../minilibx/minilibx_opengl_20191021/mlx.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>

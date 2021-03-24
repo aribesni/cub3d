@@ -33,7 +33,7 @@ static void	ft_free_3(t_calcul *calcul)
 		if (calcul->win)
 			mlx_destroy_window(calcul->mlx, calcul->win);
 	}
-//	mlx_destroy_display(calcul->mlx); // linux
+	mlx_destroy_display(calcul->mlx);
 	if (calcul->mlx)
 	{
 		free(calcul->mlx);
