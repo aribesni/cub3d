@@ -12,44 +12,19 @@
 
 #include "cub.h"
 
-static void		ft_arg(t_calcul *calcul, int argc, char **argv, int count)
-{
-	if (argc >= 3)
-	{
-		if (argc > 3)
-		{
-			ft_free_save(calcul);
-			ft_free_tab(calcul->read, count);
-			free(calcul->res_x);
-			free(calcul->res_y);
-			ft_exit(calcul, "Too many arguments");
-		}
-		if (ft_strcmp(argv[2], "-save") == 0)
-			calcul->save = 1;
-		else
-		{
-			ft_free_save(calcul);
-			ft_free_tab(calcul->read, count);
-			free(calcul->res_x);
-			free(calcul->res_y);
-			ft_exit(calcul, "Invalid Argument");
-		}
-	}
-}
-
 static void		ft_read_file_3(t_calcul *calcul, int j, int count)
 {
 	int			width;
 
 	width = 0;
 	if (calcul->read[calcul->start][j] != '1')
-		ft_exit(calcul, "File Error");
+		ft_exit("File Error");
 	ft_def_world(calcul);
 	if (calcul->count_res != 1 || calcul->count_tex_no != 1 ||
 		calcul->count_tex_so != 1 || calcul->count_tex_ea != 1 ||
 		calcul->count_tex_we != 1 || calcul->count_sprite != 1 ||
 		calcul->count_c != 1 || calcul->count_f != 1)
-		ft_exit(calcul, "File Error");
+		ft_exit("File Error");
 	width = count - calcul->start;
 	calcul->mapH = --width;
 }
@@ -94,7 +69,8 @@ static int		ft_read_file(t_calcul *calcul, int fd, int count, char *line)
 	while (i < count)
 	{
 		get_next_line(fd, &line);
-		if (!(calcul->read[i] = (char*)malloc(sizeof(char) * ft_strlen(line) + 1)))
+		if (!(calcul->read[i] = (char*)malloc(sizeof(char) *
+			ft_strlen(line) + 1)))
 			return (-1);
 		while (j < ft_strlen(line))
 		{
@@ -106,6 +82,7 @@ static int		ft_read_file(t_calcul *calcul, int fd, int count, char *line)
 		j = 0;
 		i++;
 	}
+	ft_read_file_2(calcul, count);
 	return (1);
 }
 
@@ -118,15 +95,12 @@ int				main(int argc, char **argv)
 
 	count = 0;
 	if (argc == 1)
-		ft_exit(&calcul, "Missing Argument");
+		ft_exit("Missing Argument");
 	fd = open(argv[1], O_RDONLY);
-//	line = NULL;
 	ft_bzero(&calcul, sizeof(t_calcul));
-	calcul.color_c = 0;
-	calcul.color_f = 0;
 	ft_init(&calcul);
 	if (fd < 0)
-		ft_exit(&calcul, "Invalid Argument");
+		ft_exit("Invalid Argument");
 	while (get_next_line(fd, &line))
 	{
 		count++;
@@ -136,7 +110,6 @@ int				main(int argc, char **argv)
 	free(line);
 	fd = open(argv[1], O_RDONLY);
 	ft_read_file(&calcul, fd, count, line);
-	ft_read_file_2(&calcul, count);
 	ft_arg(&calcul, argc, argv, count);
 	ft_create_map(&calcul, count);
 	return (0);

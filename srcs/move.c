@@ -84,3 +84,12 @@ void			ft_move(t_calcul *calcul)
 	if (calcul->rt_right == true)
 		ft_rotate(calcul, -calcul->rotSpeed);
 }
+
+int				ft_run(t_calcul *calcul)
+{
+	ft_move(calcul);
+	ft_calculate(calcul);
+	mlx_put_image_to_window(calcul->mlx, calcul->win, calcul->image->img_ptr,
+	0, 0);
+	return (1);
+}

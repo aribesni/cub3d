@@ -14,16 +14,15 @@ NAME = 		Cub3D
 
 OS = 		${shell uname}
 
-SRCS = 		cub3d.c move.c def_world.c convert_endian.c image.c \
-			key_events.c store_color.c main.c raycasting.c textures.c \
-			create_map.c sprites.c init.c spawn.c free.c screenshot.c \
-			check_path.c get_info.c add_sprite.c cub3d_utils.c \
+SRCS = 		add_sprite.c create_map.c cub3d.c cub3d_utils.c \
+			cub3d_utils_2.c def_world.c free.c get_info.c image.c \
+			main.c move.c raycasting.c screenshot.c sprites.c store_color.c \
 
-#CFLAG = 	-Wall -Wextra -Werror -I ${HEADER}
+CFLAG = 	-Wall -Wextra -Werror -I ${HEADER}
 
-CFLAG = 	-Wall -Wextra -Werror
+#CFLAG = 	-Wall -Wextra -Werror
 
-#HEADER = cub.h
+HEADER = cub.h
 
 #CC = gcc
 
@@ -43,30 +42,30 @@ else
 	CC = gcc
 endif
 
-all: 		${NAME}
+#all: 		${NAME}
 
 L_DIR =		./libft/
 
-#all: 		libft minilibx ${NAME}
+all: 		libft minilibx ${NAME}
 
-${LIBS}:
-			make -C ${MLX_DIR}
-			make -C ${L_DIR}
-
-${NAME}:	${OBJS} ${LIBS}
-			${CC} ${CFLAG} -o ${NAME} ${OBJS} ${MLX_LNK} ${LIBS}
-
-.c.o:
-			${CC} ${CFLAG} -I ./includes/ -c $< -o $@
-
-#minilibx:
+#${LIBS}:
 #			make -C ${MLX_DIR}
-
-#libft:
 #			make -C ${L_DIR}
 
-#${NAME}:	${OBJS}
-#			${CC} ${CFLAG} ${MLX_LNK} ${SRCS} -L${MLX_DIR} -L${L_DIR} -o ${NAME}
+#${NAME}:	${OBJS} ${LIBS}
+#			${CC} ${CFLAG} -o ${NAME} ${OBJS} ${MLX_LNK} ${LIBS}
+
+#.c.o:
+#			${CC} ${CFLAG} -I ./includes/ -c $< -o $@
+
+minilibx:
+			make -C ${MLX_DIR}
+
+libft:
+			make -C ${L_DIR}
+
+${NAME}:	${OBJS}
+			${CC} ${CFLAG} ${MLX_LNK} ${SRCS} -L${MLX_DIR} -L${L_DIR} -o ${NAME}
 
 clean:
 			rm -f ${OBJS}

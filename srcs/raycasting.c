@@ -99,7 +99,7 @@ static void	ft_init_ray(t_calcul *calcul, int x)
 	calcul->hit = 0;
 }
 
-int		ft_calculate(t_calcul *calcul)
+int			ft_calculate(t_calcul *calcul)
 {
 	int		x;
 

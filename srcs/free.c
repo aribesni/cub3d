@@ -12,66 +12,6 @@
 
 #include "cub.h"
 
-static void	ft_free_map(char **map, int size)
-{
-	int		i;
-
-	i = 0;
-	while (i <= size)
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
-
-void		ft_free_save(t_calcul *calcul)
-{
-	if (calcul->map)
-	{
-		ft_free_map(calcul->map, calcul->mapH);
-		calcul->map = NULL;
-	}
-	if (calcul->ZBuffer)
-	{
-		free(calcul->ZBuffer);
-		calcul->ZBuffer = NULL;
-	}
-	if (calcul->path_tex_no)
-	{
-		free(calcul->path_tex_no);
-		calcul->path_tex_no = NULL;
-	}
-	if (calcul->path_tex_so)
-	{
-		free(calcul->path_tex_so);
-		calcul->path_tex_so = NULL;
-	}
-	if (calcul->path_tex_ea)
-	{
-		free(calcul->path_tex_ea);
-		calcul->path_tex_ea = NULL;
-	}
-	if (calcul->path_tex_we)
-	{
-		free(calcul->path_tex_we);
-		calcul->path_tex_we = NULL;
-	}
-	if (calcul->path_sprite)
-	{
-		free(calcul->path_sprite);
-		calcul->sprite = NULL;
-	}
-	ft_free_img(calcul);
-	ft_free_tex(calcul);
-	ft_free_sprite(calcul);
-	if (calcul->mlx)
-	{
-		free(calcul->mlx);
-		calcul->mlx = NULL;
-	}
-}
-
 void		ft_free_tab(char **tab, int size)
 {
 	int		i;
@@ -87,27 +27,13 @@ void		ft_free_tab(char **tab, int size)
 
 static void	ft_free_3(t_calcul *calcul)
 {
-/*	if (calcul->color_temp)
-	{
-		free(calcul->color_temp);
-		calcul->color_temp = NULL;
-	}
-	if (calcul->read)
-	{
-		free(calcul->read);
-		calcul->read = NULL;
-	}
-	
-	dprintf(2, "HERE");
-	mlx_destroy_display(calcul->mlx);
-	free(calcul->mlx);
-*/	if (calcul->save == 0)
+	if (calcul->save == 0)
 	{
 		mlx_clear_window(calcul->mlx, calcul->win);
 		if (calcul->win)
 			mlx_destroy_window(calcul->mlx, calcul->win);
 	}
-	mlx_destroy_display(calcul->mlx); // linux
+//	mlx_destroy_display(calcul->mlx); // linux
 	if (calcul->mlx)
 	{
 		free(calcul->mlx);
@@ -117,42 +43,6 @@ static void	ft_free_3(t_calcul *calcul)
 
 static void	ft_free_2(t_calcul *calcul)
 {
-/*	if (calcul->res_x)
-	{
-		free(calcul->res_x);
-		calcul->res_x = NULL;
-	}
-	if (calcul->res_y)
-	{
-		free(calcul->res_y);
-		calcul->res_y = NULL;
-	}
-*/
-	ft_free_3(calcul);
-}
-
-void		ft_free(t_calcul *calcul)
-{
-	if (calcul->map)
-	{
-		ft_free_map(calcul->map, calcul->mapH);
-		calcul->map = NULL;
-	}
-	if (calcul->ZBuffer)
-	{
-		free(calcul->ZBuffer);
-		calcul->ZBuffer = NULL;
-	}
-	if (calcul->path_tex_no)
-	{
-		free(calcul->path_tex_no);
-		calcul->path_tex_no = NULL;
-	}
-	if (calcul->path_tex_so)
-	{
-		free(calcul->path_tex_so);
-		calcul->path_tex_so = NULL;
-	}
 	if (calcul->path_tex_ea)
 	{
 		free(calcul->path_tex_ea);
@@ -171,21 +61,37 @@ void		ft_free(t_calcul *calcul)
 	ft_free_img(calcul);
 	ft_free_tex(calcul);
 	ft_free_sprite(calcul);
-	ft_free_2(calcul);
 }
 
-void		ft_exit(t_calcul *calcul, char *str)
+void		ft_free(t_calcul *calcul)
 {
-	(void)calcul;
-	ft_putendl(str);
-//	ft_free(calcul);
-	exit(1);
+	if (calcul->map)
+	{
+		ft_free_tab(calcul->map, calcul->mapH + 1);
+		calcul->map = NULL;
+	}
+	if (calcul->ZBuffer)
+	{
+		free(calcul->ZBuffer);
+		calcul->ZBuffer = NULL;
+	}
+	if (calcul->path_tex_no)
+	{
+		free(calcul->path_tex_no);
+		calcul->path_tex_no = NULL;
+	}
+	if (calcul->path_tex_so)
+	{
+		free(calcul->path_tex_so);
+		calcul->path_tex_so = NULL;
+	}
+	ft_free_2(calcul);
 }
 
 int			ft_escape(t_calcul *calcul)
 {
-//	ft_free_img(calcul);
 	ft_free(calcul);
+	ft_free_3(calcul);
 	exit(1);
 	return (1);
 }

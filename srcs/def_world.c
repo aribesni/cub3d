@@ -19,25 +19,21 @@ static void	ft_s(t_calcul *calcul, int i, int j)
 	size = ft_strlen(calcul->read[i] + j);
 	if (calcul->read[i][j] == 'S' && calcul->read[i][j + 1] != 'O' &&
 			calcul->read[i][j + 1] != ' ' && calcul->read[i][j + 1] != '.')
-		ft_exit(calcul, "File Error");
+		ft_exit("File Error");
 	else if (calcul->read[i][j] == 'S' && calcul->read[i][j + 1] == 'O' &&
 			calcul->count_tex_so == 0)
 	{
-		if (!(calcul->path_tex_so = (char*)malloc(sizeof(char) * size + 1)))
-			return ;
-		ft_get_path(calcul, i, j, calcul->path_tex_so);
+		calcul->path_tex_so = ft_get_path(calcul, i, j);
 		calcul->count_tex_so++;
 	}
 	else if (calcul->read[i][j] == 'S' && calcul->read[i][j + 1] != 'O' &&
 			calcul->count_sprite == 0)
 	{
-		if (!(calcul->path_sprite = (char*)malloc(sizeof(char) * size + 1)))
-			return ;
-		ft_get_path(calcul, i, j, calcul->path_sprite);
+		calcul->path_sprite = ft_get_path(calcul, i, j);
 		calcul->count_sprite++;
 	}
 	else
-		ft_exit(calcul, "File Error");
+		ft_exit("File Error");
 }
 
 static void	ft_n_e_w(t_calcul *calcul, int i, int j, char c)
@@ -47,38 +43,25 @@ static void	ft_n_e_w(t_calcul *calcul, int i, int j, char c)
 	size = ft_strlen(calcul->read[i] + j);
 	if (c == 'N')
 	{
-		if (!(calcul->path_tex_no = (char*)malloc(sizeof(char) * size + 1)))
-			return ;
-		ft_get_path(calcul, i, j, calcul->path_tex_no);
+		calcul->path_tex_no = ft_get_path(calcul, i, j);
 		calcul->count_tex_no++;
 	}
 	if (c == 'E')
 	{
-		if (!(calcul->path_tex_ea = (char*)malloc(sizeof(char) * size + 1)))
-			return ;
-		ft_get_path(calcul, i, j, calcul->path_tex_ea);
+		calcul->path_tex_ea = ft_get_path(calcul, i, j);
 		calcul->count_tex_ea++;
 	}
 	if (c == 'W')
 	{
-		if (!(calcul->path_tex_we = (char*)malloc(sizeof(char) * size + 1)))
-			return ;
-		ft_get_path(calcul, i, j, calcul->path_tex_we);
+		calcul->path_tex_we = ft_get_path(calcul, i, j);
 		calcul->count_tex_we++;
 	}
 }
 
 static void	ft_res(t_calcul *calcul, int i, int j)
 {
-	int		size;
-
-	size = ft_strlen(calcul->read[i] + j);
-	if (!(calcul->res_x = (char*)malloc(sizeof(char) * size + 1)))
-		return ;
-	ft_get_res(calcul, i, &j, calcul->res_x);
-	if (!(calcul->res_y = (char*)malloc(sizeof(char) * size + 1)))
-		return ;
-	ft_get_res(calcul, i, &j, calcul->res_y);
+	calcul->res_x = ft_get_res(calcul, i, &j);
+	calcul->res_y = ft_get_res(calcul, i, &j);
 	ft_file_error(calcul, i, j);
 	calcul->count_res++;
 }
@@ -103,7 +86,7 @@ static void	ft_browse_info(t_calcul *calcul, int i, int j)
 	else if (calcul->read[i][j] == ' ' || calcul->read[i][j] == '\0')
 		j = 0;
 	else
-		ft_exit(calcul, "File Error");
+		ft_exit("File Error");
 }
 
 void		ft_def_world(t_calcul *calcul)
