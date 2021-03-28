@@ -18,13 +18,20 @@ static void		ft_read_file_3(t_calcul *calcul, int j, int count)
 
 	width = 0;
 	if (calcul->read[calcul->start][j] != '1')
+	{
+		ft_free_tab(calcul->read, count);
 		ft_exit("Map Not Closed");
+	}
 	ft_def_world(calcul);
 	if (calcul->count_res != 1 || calcul->count_tex_no != 1 ||
 		calcul->count_tex_so != 1 || calcul->count_tex_ea != 1 ||
 		calcul->count_tex_we != 1 || calcul->count_sprite != 1 ||
 		calcul->count_c != 1 || calcul->count_f != 1)
+	{
+		ft_free_tab(calcul->read, count);
 		ft_exit("File Error");
+	}
+	calcul->readH = count;
 	width = count - calcul->start;
 	calcul->mapH = --width;
 }
@@ -97,7 +104,6 @@ int				main(int argc, char **argv)
 	if (argc == 1)
 		ft_exit("Missing Argument");
 	fd = open(argv[1], O_RDONLY);
-	ft_bzero(&calcul, sizeof(t_calcul));
 	ft_init(&calcul);
 	if (fd < 0)
 		ft_exit("Invalid Argument");
@@ -106,11 +112,14 @@ int				main(int argc, char **argv)
 		count++;
 		free(line);
 	}
-	count += (line[0] == '\0') ? 0 : 1;
+//	count += (line[0] == '\0') ? 0 : 1;
+	count++;
 	free(line);
+	if (count == 0)
+		ft_exit("Empty File");
 	fd = open(argv[1], O_RDONLY);
+	ft_arg(&calcul, argc, argv);
 	ft_read_file(&calcul, fd, count, line);
-	ft_arg(&calcul, argc, argv, count);
 	ft_create_map(&calcul, count);
 	return (0);
 }

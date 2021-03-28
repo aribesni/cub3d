@@ -12,20 +12,7 @@
 
 #include "cub.h"
 
-void		ft_free_tab(char **tab, int size)
-{
-	int		i;
-
-	i = 0;
-	while (i < size)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-static void	ft_free_3(t_calcul *calcul)
+static void	ft_free_mlx(t_calcul *calcul)
 {
 	if (calcul->save == 0)
 	{
@@ -41,8 +28,18 @@ static void	ft_free_3(t_calcul *calcul)
 	}
 }
 
-static void	ft_free_2(t_calcul *calcul)
+void		ft_free_path(t_calcul *calcul)
 {
+	if (calcul->path_tex_no)
+	{
+		free(calcul->path_tex_no);
+		calcul->path_tex_no = NULL;
+	}
+	if (calcul->path_tex_so)
+	{
+		free(calcul->path_tex_so);
+		calcul->path_tex_so = NULL;
+	}
 	if (calcul->path_tex_ea)
 	{
 		free(calcul->path_tex_ea);
@@ -58,9 +55,12 @@ static void	ft_free_2(t_calcul *calcul)
 		free(calcul->path_sprite);
 		calcul->sprite = NULL;
 	}
-	ft_free_img(calcul);
-	ft_free_tex(calcul);
-	ft_free_sprite(calcul);
+}
+
+void		ft_free_res(t_calcul *calcul)
+{
+	free(calcul->res_x);
+	free(calcul->res_y);
 }
 
 void		ft_free(t_calcul *calcul)
@@ -75,23 +75,17 @@ void		ft_free(t_calcul *calcul)
 		free(calcul->ZBuffer);
 		calcul->ZBuffer = NULL;
 	}
-	if (calcul->path_tex_no)
-	{
-		free(calcul->path_tex_no);
-		calcul->path_tex_no = NULL;
-	}
-	if (calcul->path_tex_so)
-	{
-		free(calcul->path_tex_so);
-		calcul->path_tex_so = NULL;
-	}
-	ft_free_2(calcul);
+	ft_free_path(calcul);
+	ft_free_res(calcul);
+	ft_free_img(calcul);
+	ft_free_tex(calcul);
+	ft_free_sprite(calcul);
 }
 
 int			ft_escape(t_calcul *calcul)
 {
 	ft_free(calcul);
-	ft_free_3(calcul);
+	ft_free_mlx(calcul);
 	exit(1);
 	return (1);
 }

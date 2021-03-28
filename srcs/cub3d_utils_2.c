@@ -58,24 +58,6 @@ void		ft_spawn(t_calcul *calcul, char c, double x, double y)
 	}
 }
 
-void		ft_init(t_calcul *calcul)
-{
-	calcul->movSpeed = 0.15;
-	calcul->rotSpeed = 0.5;
-	calcul->up = 0;
-	calcul->down = 0;
-	calcul->left = 0;
-	calcul->right = 0;
-	calcul->rt_left = 0;
-	calcul->rt_right = 0;
-	calcul->color = 0;
-	calcul->color_c = 0;
-	calcul->color_f = 0;
-	calcul->bit_1 = 0;
-	calcul->bit_2 = 0;
-	calcul->bit_3 = 0;
-}
-
 void		ft_convert_endian(t_calcul *calcul, char c)
 {
 	int		temp;

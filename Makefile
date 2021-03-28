@@ -6,7 +6,7 @@
 #    By: aribesni <aribesni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/30 13:26:02 by aribesni          #+#    #+#              #
-#    Updated: 2020/10/02 18:24:57 by aribesni         ###   ########.fr        #
+#    Updated: 2021/03/28 15:02:17 by aribesni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,16 +15,16 @@ NAME = 		Cub3D
 OS = 		${shell uname}
 
 SRC = 		add_sprite.c create_map.c cub3d.c cub3d_utils.c \
-			cub3d_utils_2.c def_world.c free.c get_info.c image.c \
+			cub3d_utils_2.c def_world.c free.c free_2.c get_info.c image.c \
 			main.c move.c raycasting.c screenshot.c sprites.c store_color.c \
 
 SRCS = 		$(addprefix ./srcs/, $(SRC))
 
-#CFLAG = 	-Wall -Wextra -Werror -I ${HEADER}
+CFLAG = 	-Wall -Wextra -Werror -I ${HEADER}
 
-CFLAG = 	-Wall -Wextra -Werror
+#CFLAG = 	-Wall -Wextra -Werror
 
-#HEADER = includes/cub.h
+HEADER = includes/cub.h
 
 #CC = gcc
 
@@ -42,30 +42,30 @@ else
 	CC = gcc
 endif
 
-all: 		${NAME}
+#all: 		${NAME}
 
 L_DIR =		./libft/
 
-#all: 		libft minilibx ${NAME}
+all: 		libft minilibx ${NAME}
 
-${LIBS}:
-			make -C ${MLX_DIR}
-			make -C ${L_DIR}
-
-${NAME}:	${OBJS} ${LIBS}
-			${CC} ${CFLAG} -o ${NAME} ${OBJS} ${MLX_LNK} ${LIBS}
-
-.c.o:
-			${CC} ${CFLAG} -I ./includes/ -c $< -o $@
-
-#minilibx:
+#${LIBS}:
 #			make -C ${MLX_DIR}
-
-#libft:
 #			make -C ${L_DIR}
 
-#${NAME}:	${OBJS}
-#			${CC} ${CFLAG} ${MLX_LNK} ${SRCS} -L${MLX_DIR} -L${L_DIR} -o ${NAME}
+#${NAME}:	${OBJS} ${LIBS}
+#			${CC} ${CFLAG} -o ${NAME} ${OBJS} ${MLX_LNK} ${LIBS}
+
+#.c.o:
+#			${CC} ${CFLAG} -I ./includes/ -c $< -o $@
+
+minilibx:
+			make -C ${MLX_DIR}
+
+libft:
+			make -C ${L_DIR}
+
+${NAME}:	${OBJS}
+			${CC} ${CFLAG} ${MLX_LNK} ${SRCS} -L${MLX_DIR} -L${L_DIR} -o ${NAME}
 
 clean:
 			rm -f ${OBJS}

@@ -99,8 +99,6 @@ void		ft_cub3d(t_calcul *calcul)
 	first_display = true;
 	calcul->w = ft_atoi(calcul->res_x);
 	calcul->h = ft_atoi(calcul->res_y);
-	free(calcul->res_x);
-	free(calcul->res_y);
 	if (calcul->up == true || calcul->down == true || calcul->left == true ||
 		calcul->right == true || first_display == true)
 	{

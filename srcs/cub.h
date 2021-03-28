@@ -18,6 +18,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <ctype.h>
 # define true 1
 # define false 0
 
@@ -133,6 +134,7 @@ typedef struct		s_calcul
 	int 			drawEndX;
 	int 			stripe;
 	int				mapH;
+	int				readH;
 	int				sp_count;
 	int				sp_x;
 	int				sp_y;
@@ -198,16 +200,19 @@ typedef struct		s_calcul
 }					t_calcul;
 
 void				ft_add_sprite(t_calcul *calcul);
-void				ft_arg(t_calcul *calcul, int argc, char **argv, int count);
-void    			ft_check_path(char *path);
+void				ft_arg(t_calcul *calcul, int argc, char **argv);
 void				ft_convert_endian(t_calcul *calcul, char c);
 void				ft_cub3d(t_calcul *calcul);
 void				ft_def_world(t_calcul *calcul);
 void       			ft_exit(char *str);
-void				ft_file_error(t_calcul *calcul, int i, int j);
 void				ft_floor_ceiling(t_calcul *calcul, int i, int j, char c);
 void    			ft_free(t_calcul *calcul);
+void				ft_free_get_path(t_calcul *calcul, char *path, char *str);
 void				ft_free_img(t_calcul *calcul);
+void				ft_free_info(t_calcul *calcul, char *str);
+void				ft_free_map(t_calcul *calcul, int i, char *str);
+void				ft_free_path(t_calcul *calcul);
+void				ft_free_res(t_calcul *calcul);
 void				ft_free_save(t_calcul *calcul);
 void    			ft_free_sprite(t_calcul *calcul);
 void				ft_free_tex(t_calcul *calcul);
@@ -220,9 +225,11 @@ void    			ft_spawn(t_calcul *calcul, char c, double x, double y);
 void				ft_store_color(t_calcul *calcul, t_image *image, int x);
 void				ft_texture(t_calcul *calcul);
 int					ft_calculate(t_calcul *calcul);
+int	    			ft_check_path(char *path);
 int					ft_create_map(t_calcul *calcul, int count);
 int					ft_disp_col(t_calcul *calcul, int x);
 int					ft_escape(t_calcul *calcul);
+int					ft_file_error(t_calcul *calcul, int i, int j);
 int					ft_init_sprite(t_calcul *calcul);
 int					ft_run(t_calcul *calcul);
 int    				ft_screenshot(t_calcul *calcul);

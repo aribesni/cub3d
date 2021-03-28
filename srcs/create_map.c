@@ -21,7 +21,7 @@ static void	ft_parse_map_3(t_calcul *calcul, int i, int j)
 			ft_spawn(calcul, calcul->read[calcul->start][j],
 			(double)i, (double)j);
 		else
-			ft_exit("Error In Spawn Position");
+			ft_free_map(calcul, i, "Error In Spawn Position");
 		calcul->map[i][j] = '0';
 		calcul->count_pos++;
 	}
@@ -43,8 +43,8 @@ static void	ft_parse_map_2(t_calcul *calcul, int i, int j)
 			calcul->read[calcul->start][j - 1] == ' ' ||
 			calcul->read[calcul->start][j - 1] == '\0' ||
 			calcul->read[calcul->start][j + 1] == ' ' ||
-			calcul->read[calcul->start][j + 1] == '\0')
-			ft_exit("Invalid Space in Map");
+			calcul->read[calcul->start][j + 1] == '\0' || i == 0)
+			ft_free_map(calcul, i, "Invalid Space in Map");
 	}
 	ft_parse_map_3(calcul, i, j);
 }
@@ -62,13 +62,13 @@ static void	ft_parse_map(t_calcul *calcul, int i, int j)
 			calcul->read[calcul->start][j - 1] != ' ' &&
 			calcul->read[calcul->start][j + 1] != '1' &&
 			calcul->read[calcul->start][j + 1] != ' '))
-			ft_exit("Invalid Space In Map");
+			ft_free_map(calcul, i, "Invalid Space In Map");
 	}
 	if (calcul->map[i][j] != 'N' && calcul->map[i][j] != 'S' &&
 		calcul->map[i][j] != 'E' && calcul->map[i][j] != 'W' &&
 		calcul->map[i][j] != '0' && calcul->map[i][j] != '1' &&
 		calcul->map[i][j] != '2' && calcul->map[i][j] != ' ')
-		ft_exit("Invalid Character In Map");
+		ft_free_map(calcul, i, "Invalid Character In Map");
 	ft_parse_map_2(calcul, i, j);
 }
 
@@ -81,13 +81,11 @@ static int	ft_fill_map(t_calcul *calcul, int i, int j, int count)
 		size = ft_strlen(calcul->read[calcul->start]);
 		if (!(calcul->map[i] = (char*)malloc(sizeof(char) * size + 1)))
 			return (-1);
-		while (calcul->read[calcul->start][j] != '1')
-		{
-			calcul->map[i][j] = ' ';
-			j++;
-		}
+		while (calcul->read[calcul->start][j] != '1' &&
+		calcul->read[calcul->start][j] == ' ')
+			calcul->map[i][j++] = ' ';
 		if (calcul->read[calcul->start][j] != '1')
-			ft_exit("Map Not Closed");
+			ft_free_map(calcul, i, "Map Not Closed");
 		while (calcul->read[calcul->start][j])
 		{
 			calcul->map[i][j] = calcul->read[calcul->start][j];

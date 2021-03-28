@@ -48,7 +48,12 @@ void		ft_floor_ceiling(t_calcul *calcul, int i, int j, char c)
 	ft_get_rgb(calcul->color_temp, &calcul->bit_2);
 	calcul->color_temp = ft_get_res(calcul, i, &j);
 	ft_get_rgb(calcul->color_temp, &calcul->bit_3);
-	ft_file_error(calcul, i, j);
+	if (ft_file_error(calcul, i, j) == 0)
+	{
+		ft_free_tab(calcul->read, calcul->readH);
+		ft_free(calcul);
+		ft_exit("Color Error");
+	}
 	ft_convert_endian(calcul, c);
 	calcul->count_c += (c == 'C') ? 1 : 0;
 	calcul->count_f += (c == 'F') ? 1 : 0;
@@ -59,7 +64,10 @@ static void	ft_get_path_2(t_calcul *calcul, int *i, int *j)
 	while (calcul->read[*i][*j] != '.' && calcul->read[*i][*j])
 	{
 		if (calcul->read[*i][*j] != ' ')
+		{
+			ft_free_tab(calcul->read, calcul->readH);
 			ft_exit("File Error : Invalid Character");
+		}
 		else
 			*j = *j + 1;
 	}
@@ -89,7 +97,7 @@ char		*ft_get_path(t_calcul *calcul, int i, int j)
 			path[k++] = calcul->read[i][j++];
 	}
 	path[k] = '\0';
-	ft_file_error(calcul, i, j);
-	ft_check_path(path);
+	if (ft_file_error(calcul, i, j) == 0 || ft_check_path(path) == 0)
+		ft_free_get_path(calcul, path, "File Error : Invalid Character");
 	return (path);
 }

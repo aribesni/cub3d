@@ -12,7 +12,26 @@
 
 #include "cub.h"
 
-void		ft_check_path(char *path)
+void		ft_init(t_calcul *calcul)
+{
+	ft_bzero(calcul, sizeof(t_calcul));
+	calcul->movSpeed = 0.15;
+	calcul->rotSpeed = 0.5;
+	calcul->up = 0;
+	calcul->down = 0;
+	calcul->left = 0;
+	calcul->right = 0;
+	calcul->rt_left = 0;
+	calcul->rt_right = 0;
+	calcul->color = 0;
+	calcul->color_c = 0;
+	calcul->color_f = 0;
+	calcul->bit_1 = 0;
+	calcul->bit_2 = 0;
+	calcul->bit_3 = 0;
+}
+
+int			ft_check_path(char *path)
 {
 	int		fd;
 	int		i;
@@ -23,50 +42,31 @@ void		ft_check_path(char *path)
 		path[i - 3] != 'x' && path[i - 4] != '.'))
 	{
 		close(fd);
-		ft_exit("File Error : Path Error");
+		return (0);
 	}
+	return (1);
 }
 
-static void	ft_free_arg(t_calcul *calcul, int count, char *str)
-{
-	ft_free(calcul);
-	ft_free_tab(calcul->read, count);
-	free(calcul->res_x);
-	free(calcul->res_y);
-	if (calcul->mlx)
-	{
-		free(calcul->mlx);
-		calcul->mlx = NULL;
-	}
-	ft_exit(str);
-}
-
-void		ft_arg(t_calcul *calcul, int argc, char **argv, int count)
+void		ft_arg(t_calcul *calcul, int argc, char **argv)
 {
 	if (argc >= 3)
 	{
 		if (argc > 3)
-			ft_free_arg(calcul, count, "Too many arguments");
+			ft_exit("Too many arguments");
 		if (ft_strcmp(argv[2], "-save") == 0)
 			calcul->save = 1;
 		else
-			ft_free_arg(calcul, count, "Invalid Argument");
+			ft_exit("Invalid Argument");
 	}
 }
 
-void		ft_file_error(t_calcul *calcul, int i, int j)
+int			ft_file_error(t_calcul *calcul, int i, int j)
 {
 	while (calcul->read[i][j])
 	{
 		if (calcul->read[i][j] != ' ')
-			ft_exit("File Error : Invalid Character");
+			return (0);
 		j++;
 	}
-}
-
-void		ft_exit(char *str)
-{
-	ft_putendl("Error");
-	ft_putendl(str);
-	exit(1);
+	return (1);
 }
