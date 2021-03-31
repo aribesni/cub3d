@@ -68,14 +68,15 @@ static int		ft_read_file(t_calcul *calcul, int fd, int count, char *line)
 {
 	int			i;
 	int			j;
+	int			ret;
 
 	i = 0;
 	j = 0;
 	if (!(calcul->read = malloc(sizeof(char*) * count)))
 		return (-1);
-	while (i < count)
+	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		get_next_line(fd, &line);
+	//	get_next_line(fd, &line);
 		if (!(calcul->read[i] = (char*)malloc(sizeof(char) *
 			ft_strlen(line) + 1)))
 			return (-1);
@@ -97,6 +98,7 @@ int				main(int argc, char **argv)
 {
 	int			fd;
 	int			count;
+	int			ret;
 	char		*line;
 	t_calcul	calcul;
 
@@ -107,13 +109,13 @@ int				main(int argc, char **argv)
 	ft_init(&calcul);
 	if (fd < 0)
 		ft_exit("Invalid Argument");
-	while (get_next_line(fd, &line))
+	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		count++;
 		free(line);
 	}
 //	count += (line[0] == '\0') ? 0 : 1;
-	count++;
+//	count++;
 	free(line);
 	if (count == 0)
 		ft_exit("Empty File");

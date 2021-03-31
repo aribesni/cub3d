@@ -27,7 +27,7 @@ static void	ft_parse_map_3(t_calcul *calcul, int i, int j)
 	}
 }
 
-static void	ft_parse_map_2(t_calcul *calcul, int i, int j)
+static void	ft_parse_map_2(t_calcul *calcul, int i, int j, int count)
 {
 	if (calcul->read[calcul->start][j] == 'N' ||
 		calcul->read[calcul->start][j] == 'S' ||
@@ -36,20 +36,21 @@ static void	ft_parse_map_2(t_calcul *calcul, int i, int j)
 		calcul->read[calcul->start][j] == '0' ||
 		calcul->read[calcul->start][j] == '2')
 	{
-		if (calcul->read[calcul->start - 1][j] == ' ' ||
+		if (i == 0 || i == count - 1 ||
+			calcul->read[calcul->start - 1][j] == ' ' ||
 			calcul->read[calcul->start - 1][j] == '\0' ||
 			calcul->read[calcul->start + 1][j] == ' ' ||
 			calcul->read[calcul->start + 1][j] == '\0' ||
 			calcul->read[calcul->start][j - 1] == ' ' ||
 			calcul->read[calcul->start][j - 1] == '\0' ||
 			calcul->read[calcul->start][j + 1] == ' ' ||
-			calcul->read[calcul->start][j + 1] == '\0' || i == 0)
+			calcul->read[calcul->start][j + 1] == '\0')
 			ft_free_map(calcul, i, "Invalid Space in Map");
 	}
 	ft_parse_map_3(calcul, i, j);
 }
 
-static void	ft_parse_map(t_calcul *calcul, int i, int j)
+static void	ft_parse_map(t_calcul *calcul, int i, int j, int count)
 {
 	calcul->sp_count += (calcul->read[calcul->start][j] == '2') ? 1 : 0;
 	if (calcul->map[i][j] == ' ')
@@ -69,13 +70,14 @@ static void	ft_parse_map(t_calcul *calcul, int i, int j)
 		calcul->map[i][j] != '0' && calcul->map[i][j] != '1' &&
 		calcul->map[i][j] != '2' && calcul->map[i][j] != ' ')
 		ft_free_map(calcul, i, "Invalid Character In Map");
-	ft_parse_map_2(calcul, i, j);
+	ft_parse_map_2(calcul, i, j, count);
 }
 
 static int	ft_fill_map(t_calcul *calcul, int i, int j, int count)
 {
 	int		size;
 
+	ft_printf("COUNT : %i\n", count);
 	while (++i < count)
 	{
 		size = ft_strlen(calcul->read[calcul->start]);
@@ -89,7 +91,7 @@ static int	ft_fill_map(t_calcul *calcul, int i, int j, int count)
 		while (calcul->read[calcul->start][j])
 		{
 			calcul->map[i][j] = calcul->read[calcul->start][j];
-			ft_parse_map(calcul, i, j);
+			ft_parse_map(calcul, i, j, count);
 			j++;
 		}
 		calcul->map[i][j] = '\0';
