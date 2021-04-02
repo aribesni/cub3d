@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "cub.h": "c"
+        "cub.h": "c",
+        "chrono": "c",
+        "unordered_map": "c"
     }
 }

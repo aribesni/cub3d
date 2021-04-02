@@ -14,22 +14,19 @@
 
 static void	ft_s(t_calcul *calcul, int i, int j)
 {
-	int		size;
-
-	size = ft_strlen(calcul->read[i] + j);
 	if (calcul->read[i][j] == 'S' && calcul->read[i][j + 1] != 'O' &&
-		calcul->read[i][j + 1] != ' ' && calcul->read[i][j + 1] != '.')
+		calcul->read[i][j + 1] != ' ')
 		ft_free_info(calcul, "File Error : Invalid Character");
 	else if (calcul->read[i][j] == 'S' && calcul->read[i][j + 1] == 'O' &&
-			calcul->count_tex_so == 0)
+			calcul->count_tex_so == 0 && calcul->read[i][j + 2] == ' ')
 	{
-		calcul->path_tex_so = ft_get_path(calcul, i, j);
+		calcul->path_tex_so = ft_get_path(calcul, i, j + 1);
 		calcul->count_tex_so++;
 	}
 	else if (calcul->read[i][j] == 'S' && calcul->read[i][j + 1] != 'O' &&
 			calcul->count_sprite == 0)
 	{
-		calcul->path_sprite = ft_get_path(calcul, i, j);
+		calcul->path_sprite = ft_get_path(calcul, i, j + 1);
 		calcul->count_sprite++;
 	}
 	else
@@ -38,24 +35,23 @@ static void	ft_s(t_calcul *calcul, int i, int j)
 
 static void	ft_n_e_w(t_calcul *calcul, int i, int j, char c)
 {
-	int		size;
-
-	size = ft_strlen(calcul->read[i] + j);
-	if (c == 'N')
+	if (c == 'N' && calcul->read[i][j + 2] == ' ')
 	{
-		calcul->path_tex_no = ft_get_path(calcul, i, j);
+		calcul->path_tex_no = ft_get_path(calcul, i, j + 1);
 		calcul->count_tex_no++;
 	}
-	if (c == 'E')
+	else if (c == 'E' && calcul->read[i][j + 2] == ' ')
 	{
-		calcul->path_tex_ea = ft_get_path(calcul, i, j);
+		calcul->path_tex_ea = ft_get_path(calcul, i, j + 1);
 		calcul->count_tex_ea++;
 	}
-	if (c == 'W')
+	else if (c == 'W' && calcul->read[i][j + 2] == ' ')
 	{
-		calcul->path_tex_we = ft_get_path(calcul, i, j);
+		calcul->path_tex_we = ft_get_path(calcul, i, j + 1);
 		calcul->count_tex_we++;
 	}
+	else
+		ft_free_info(calcul, "File Error : Invalid Character");
 }
 
 static void	ft_res(t_calcul *calcul, int i, int j)
@@ -70,7 +66,8 @@ static void	ft_browse_info(t_calcul *calcul, int i, int j)
 {
 	while (calcul->read[i][j] == ' ' && calcul->read[i][j])
 		j++;
-	if (calcul->read[i][j] == 'R' && calcul->count_res == 0)
+	if (calcul->read[i][j] == 'R' && calcul->count_res == 0 &&
+		calcul->read[i][j + 1] == ' ')
 		ft_res(calcul, i, j);
 	else if ((calcul->read[i][j] == 'N' &&
 	calcul->read[i][j + 1] == 'O' && calcul->count_tex_no == 0) ||
@@ -80,8 +77,9 @@ static void	ft_browse_info(t_calcul *calcul, int i, int j)
 		ft_n_e_w(calcul, i, j, calcul->read[i][j]);
 	else if (calcul->read[i][j] == 'S')
 		ft_s(calcul, i, j);
-	else if ((calcul->read[i][j] == 'C' && calcul->count_c == 0) ||
-			(calcul->read[i][j] == 'F' && calcul->count_f == 0))
+	else if (((calcul->read[i][j] == 'C' && calcul->count_c == 0) ||
+			(calcul->read[i][j] == 'F' && calcul->count_f == 0)) &&
+			calcul->read[i][j + 1] == ' ')
 		ft_floor_ceiling(calcul, i, j, calcul->read[i][j]);
 	else if (calcul->read[i][j] == ' ' || calcul->read[i][j] == '\0')
 		j = 0;

@@ -59,20 +59,6 @@ void		ft_floor_ceiling(t_calcul *calcul, int i, int j, char c)
 	calcul->count_f += (c == 'F') ? 1 : 0;
 }
 
-static void	ft_get_path_2(t_calcul *calcul, int *i, int *j)
-{
-	while (calcul->read[*i][*j] != '.' && calcul->read[*i][*j])
-	{
-		if (calcul->read[*i][*j] != ' ')
-		{
-			ft_free_tab(calcul->read, calcul->readH);
-			ft_exit("File Error : Invalid Character");
-		}
-		else
-			*j = *j + 1;
-	}
-}
-
 char		*ft_get_path(t_calcul *calcul, int i, int j)
 {
 	int		k;
@@ -81,14 +67,14 @@ char		*ft_get_path(t_calcul *calcul, int i, int j)
 
 	k = 0;
 	size = ft_strlen(calcul->read[i] + j);
-	j++;
 	if (!(path = (char*)malloc(sizeof(char) * size + 1)))
 		return (NULL);
 	if (calcul->read[i][j] == 'E' || calcul->read[i][j] == 'O' ||
 		calcul->read[i][j] == 'A')
 		j++;
-	ft_get_path_2(calcul, &i, &j);
-	if (calcul->read[i][j] == '.')
+	while (calcul->read[i][j] == ' ' && calcul->read[i][j])
+		j++;
+	if (calcul->read[i][j] != ' ')
 	{
 		while (calcul->read[i][j] != ' ' && calcul->read[i][j] != '\t' &&
 		calcul->read[i][j] != '\n' && calcul->read[i][j] != '\v' &&

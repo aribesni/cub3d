@@ -27,7 +27,7 @@ static void	ft_parse_map_3(t_calcul *calcul, int i, int j)
 	}
 }
 
-static void	ft_parse_map_2(t_calcul *calcul, int i, int j, int count)
+static void	ft_parse_map_2(t_calcul *calcul, int i, int j)
 {
 	if (calcul->read[calcul->start][j] == 'N' ||
 		calcul->read[calcul->start][j] == 'S' ||
@@ -36,7 +36,7 @@ static void	ft_parse_map_2(t_calcul *calcul, int i, int j, int count)
 		calcul->read[calcul->start][j] == '0' ||
 		calcul->read[calcul->start][j] == '2')
 	{
-		if (i == 0 || i == count - 1 ||
+		if (i == 0 || i == calcul->count - 1 ||
 			calcul->read[calcul->start - 1][j] == ' ' ||
 			calcul->read[calcul->start - 1][j] == '\0' ||
 			calcul->read[calcul->start + 1][j] == ' ' ||
@@ -50,7 +50,7 @@ static void	ft_parse_map_2(t_calcul *calcul, int i, int j, int count)
 	ft_parse_map_3(calcul, i, j);
 }
 
-static void	ft_parse_map(t_calcul *calcul, int i, int j, int count)
+static void	ft_parse_map(t_calcul *calcul, int i, int j)
 {
 	calcul->sp_count += (calcul->read[calcul->start][j] == '2') ? 1 : 0;
 	if (calcul->map[i][j] == ' ')
@@ -70,15 +70,14 @@ static void	ft_parse_map(t_calcul *calcul, int i, int j, int count)
 		calcul->map[i][j] != '0' && calcul->map[i][j] != '1' &&
 		calcul->map[i][j] != '2' && calcul->map[i][j] != ' ')
 		ft_free_map(calcul, i, "Invalid Character In Map");
-	ft_parse_map_2(calcul, i, j, count);
+	ft_parse_map_2(calcul, i, j);
 }
 
-static int	ft_fill_map(t_calcul *calcul, int i, int j, int count)
+static int	ft_fill_map(t_calcul *calcul, int i, int j)
 {
 	int		size;
 
-	ft_printf("COUNT : %i\n", count);
-	while (++i < count)
+	while (++i < calcul->count)
 	{
 		size = ft_strlen(calcul->read[calcul->start]);
 		if (!(calcul->map[i] = (char*)malloc(sizeof(char) * size + 1)))
@@ -91,7 +90,7 @@ static int	ft_fill_map(t_calcul *calcul, int i, int j, int count)
 		while (calcul->read[calcul->start][j])
 		{
 			calcul->map[i][j] = calcul->read[calcul->start][j];
-			ft_parse_map(calcul, i, j, count);
+			ft_parse_map(calcul, i, j);
 			j++;
 		}
 		calcul->map[i][j] = '\0';
@@ -101,7 +100,7 @@ static int	ft_fill_map(t_calcul *calcul, int i, int j, int count)
 	return (1);
 }
 
-int			ft_create_map(t_calcul *calcul, int count)
+int			ft_create_map(t_calcul *calcul)
 {
 	int		i;
 	int		j;
@@ -109,13 +108,13 @@ int			ft_create_map(t_calcul *calcul, int count)
 
 	i = -1;
 	j = 0;
-	size = count;
-	count -= calcul->start;
+	size = calcul->count;
+	calcul->count -= calcul->start;
 	calcul->sp_count = 0;
 	calcul->count_pos = 0;
-	if (!(calcul->map = (char**)malloc(sizeof(char*) * count)))
+	if (!(calcul->map = (char**)malloc(sizeof(char*) * calcul->count)))
 		return (-1);
-	ft_fill_map(calcul, i, j, count);
+	ft_fill_map(calcul, i, j);
 	ft_free_tab(calcul->read, size);
 	ft_cub3d(calcul);
 	return (0);

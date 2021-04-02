@@ -140,7 +140,8 @@ typedef struct		s_calcul
 	int				sp_y;
 	int				save;
 	int				start;
-	int				*order;
+	int				size_max;
+	int				count;
 	int				count_res;
 	int				count_tex_no;
 	int				count_tex_so;
@@ -148,6 +149,7 @@ typedef struct		s_calcul
 	int				count_tex_we;
 	int				count_sprite;
 	int				count_pos;
+	int				*order;
 	unsigned int	color;
 	unsigned int	count_c;
 	unsigned int	count_f;
@@ -226,7 +228,7 @@ void				ft_store_color(t_calcul *calcul, t_image *image, int x);
 void				ft_texture(t_calcul *calcul);
 int					ft_calculate(t_calcul *calcul);
 int	    			ft_check_path(char *path);
-int					ft_create_map(t_calcul *calcul, int count);
+int					ft_create_map(t_calcul *calcul);
 int					ft_disp_col(t_calcul *calcul, int x);
 int					ft_escape(t_calcul *calcul);
 int					ft_file_error(t_calcul *calcul, int i, int j);

@@ -5,7 +5,7 @@ SO ./textures/178.xpm
 EA ./textures/33.xpm
 WE ./textures/193.xpm
 
-S ./sprites/446.xpm
+S./sprites/446.xpm
 
 F 100,100,100
 C 150,150,150
