@@ -6,7 +6,7 @@
 /*   By: aribesni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 09:55:05 by aribesni          #+#    #+#             */
-/*   Updated: 2020/07/01 15:07:21 by aribesni         ###   ########.fr       */
+/*   Updated: 2021/04/08 15:19:37 by aribesni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdlib.h>
 # include <string.h>
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 32
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
 # endif
 
 # include <sys/types.h>

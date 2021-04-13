@@ -17,8 +17,8 @@
 # include <stdlib.h>
 # include <string.h>
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 32
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
 # endif
 
 # include <sys/types.h>

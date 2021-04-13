@@ -15,10 +15,10 @@
 static void	ft_s(t_calcul *calcul, int i, int j)
 {
 	if (calcul->read[i][j] == 'S' && calcul->read[i][j + 1] != 'O' &&
-		calcul->read[i][j + 1] != ' ')
+		ft_is_space(calcul->read[i][j + 1]) == 0)
 		ft_free_info(calcul, "File Error : Invalid Character");
 	else if (calcul->read[i][j] == 'S' && calcul->read[i][j + 1] == 'O' &&
-			calcul->count_tex_so == 0 && calcul->read[i][j + 2] == ' ')
+		calcul->count_tex_so == 0 && ft_is_space(calcul->read[i][j + 2]) == 1)
 	{
 		calcul->path_tex_so = ft_get_path(calcul, i, j + 1);
 		calcul->count_tex_so++;
@@ -35,17 +35,17 @@ static void	ft_s(t_calcul *calcul, int i, int j)
 
 static void	ft_n_e_w(t_calcul *calcul, int i, int j, char c)
 {
-	if (c == 'N' && calcul->read[i][j + 2] == ' ')
+	if (c == 'N' && ft_is_space(calcul->read[i][j + 2]) == 1)
 	{
 		calcul->path_tex_no = ft_get_path(calcul, i, j + 1);
 		calcul->count_tex_no++;
 	}
-	else if (c == 'E' && calcul->read[i][j + 2] == ' ')
+	else if (c == 'E' && ft_is_space(calcul->read[i][j + 2]) == 1)
 	{
 		calcul->path_tex_ea = ft_get_path(calcul, i, j + 1);
 		calcul->count_tex_ea++;
 	}
-	else if (c == 'W' && calcul->read[i][j + 2] == ' ')
+	else if (c == 'W' && ft_is_space(calcul->read[i][j + 2]) == 1)
 	{
 		calcul->path_tex_we = ft_get_path(calcul, i, j + 1);
 		calcul->count_tex_we++;
@@ -64,10 +64,10 @@ static void	ft_res(t_calcul *calcul, int i, int j)
 
 static void	ft_browse_info(t_calcul *calcul, int i, int j)
 {
-	while (calcul->read[i][j] == ' ' && calcul->read[i][j])
+	while (ft_is_space(calcul->read[i][j]) == 1 && calcul->read[i][j])
 		j++;
 	if (calcul->read[i][j] == 'R' && calcul->count_res == 0 &&
-		calcul->read[i][j + 1] == ' ')
+		(ft_is_space(calcul->read[i][j + 1]) == 1))
 		ft_res(calcul, i, j);
 	else if ((calcul->read[i][j] == 'N' &&
 	calcul->read[i][j + 1] == 'O' && calcul->count_tex_no == 0) ||
@@ -79,9 +79,9 @@ static void	ft_browse_info(t_calcul *calcul, int i, int j)
 		ft_s(calcul, i, j);
 	else if (((calcul->read[i][j] == 'C' && calcul->count_c == 0) ||
 			(calcul->read[i][j] == 'F' && calcul->count_f == 0)) &&
-			calcul->read[i][j + 1] == ' ')
+			ft_is_space(calcul->read[i][j + 1]) == 1)
 		ft_floor_ceiling(calcul, i, j, calcul->read[i][j]);
-	else if (calcul->read[i][j] == ' ' || calcul->read[i][j] == '\0')
+	else if (ft_is_space(calcul->read[i][j]) == 1 || calcul->read[i][j] == '\0')
 		j = 0;
 	else
 		ft_free_info(calcul, "File Error : Invalid Character");

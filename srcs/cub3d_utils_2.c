@@ -12,49 +12,72 @@
 
 #include "cub.h"
 
+void		ft_free_data(t_calcul *calcul, char *res, char *str)
+{
+	ft_free_tab(calcul->read, calcul->read_h);
+	free(res);
+	ft_free(calcul);
+	ft_exit(str);
+}
+
+char		*ft_extract_info(t_calcul *calcul, int i, int *j, char *res)
+{
+	int		k;
+
+	k = 0;
+	while (calcul->read[i][*j] >= '0' && calcul->read[i][*j] <= '9')
+	{
+		res[k] = calcul->read[i][*j];
+		*j = *j + 1;
+		k++;
+	}
+	res[k] = '\0';
+	return (res);
+}
+
 void		ft_texture(t_calcul *calcul)
 {
 	double	wallx;
 
 	wallx = 0.0;
 	if (calcul->side == 0)
-		wallx = calcul->rayPosY + calcul->perpWall * calcul->rayDirY;
+		wallx = calcul->raypos_y + calcul->perpwall * calcul->raydir_y;
 	else
-		wallx = calcul->rayPosX + calcul->perpWall * calcul->rayDirX;
+		wallx = calcul->raypos_x + calcul->perpwall * calcul->raydir_x;
 	wallx -= (int)wallx;
-	calcul->texX = (int)(wallx * 64);
-	if (calcul->side == 0 && calcul->rayDirX > 0)
-		calcul->texX = 64 - calcul->texX - 1;
-	else if (calcul->side == 1 && calcul->rayDirX < 0)
-		calcul->texX = 64 - calcul->texX - 1;
-	calcul->step_tex = 1.0 * 64 / calcul->lineH;
-	calcul->texPos = (calcul->drawStart - calcul->h / 2 + calcul->lineH / 2) *
+	calcul->tex_x = (int)(wallx * 64);
+	if (calcul->side == 0 && calcul->raydir_x > 0)
+		calcul->tex_x = 64 - calcul->tex_x - 1;
+	else if (calcul->side == 1 && calcul->raydir_x < 0)
+		calcul->tex_x = 64 - calcul->tex_x - 1;
+	calcul->step_tex = 1.0 * 64 / calcul->line_h;
+	calcul->texpos = (calcul->drawstart - calcul->h / 2 + calcul->line_h / 2) *
 	calcul->step_tex;
 }
 
 void		ft_spawn(t_calcul *calcul, char c, double x, double y)
 {
-	calcul->posX = y + 0.5;
-	calcul->posY = x + 0.5;
+	calcul->pos_x = y + 0.5;
+	calcul->pos_y = x + 0.5;
 	if (c == 'N')
 	{
-		calcul->dirY = -1.0;
-		calcul->planeX = -0.80;
+		calcul->dir_y = -1.0;
+		calcul->plane_x = -0.80;
 	}
 	if (c == 'S')
 	{
-		calcul->dirY = 1.0;
-		calcul->planeX = 0.80;
+		calcul->dir_y = 1.0;
+		calcul->plane_x = 0.80;
 	}
 	if (c == 'E')
 	{
-		calcul->dirX = 1.0;
-		calcul->planeY = -0.80;
+		calcul->dir_x = 1.0;
+		calcul->plane_y = -0.80;
 	}
 	if (c == 'W')
 	{
-		calcul->dirX = -1.0;
-		calcul->planeY = 0.80;
+		calcul->dir_x = -1.0;
+		calcul->plane_y = 0.80;
 	}
 }
 

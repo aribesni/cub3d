@@ -46,10 +46,10 @@ static void	ft_order_sprite(t_calcul *calcul)
 	while (i < calcul->sp_count)
 	{
 		calcul->order[i] = i;
-		calcul->dist[i] = ((calcul->posX - calcul->sprite[i].x) *
-		(calcul->posX - calcul->sprite[i].x) +
-		(calcul->posY - calcul->sprite[i].y) *
-		(calcul->posY - calcul->sprite[i].y));
+		calcul->dist[i] = ((calcul->pos_x - calcul->sprite[i].x) *
+		(calcul->pos_x - calcul->sprite[i].x) +
+		(calcul->pos_y - calcul->sprite[i].y) *
+		(calcul->pos_y - calcul->sprite[i].y));
 		i++;
 	}
 	ft_sort_sprites(calcul->dist, calcul->order, calcul->sp_count);
@@ -65,7 +65,7 @@ static void	ft_place_sprite(t_calcul *calcul)
 	i = 0;
 	x = 0;
 	y = 0;
-	while (y < calcul->mapH)
+	while (y < calcul->map_h)
 	{
 		x = 0;
 		while (x < ft_strlen(calcul->map[y]))

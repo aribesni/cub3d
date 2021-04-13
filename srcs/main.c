@@ -31,9 +31,9 @@ static void		ft_read_file_3(t_calcul *calcul, int j)
 		ft_free_tab(calcul->read, calcul->count);
 		ft_exit("File Error");
 	}
-	calcul->readH = calcul->count;
+	calcul->read_h = calcul->count;
 	width = calcul->count - calcul->start;
-	calcul->mapH = --width;
+	calcul->map_h = --width;
 }
 
 static void		ft_read_file_2(t_calcul *calcul, int fd, int tmp, char *line)
@@ -50,7 +50,7 @@ static void		ft_read_file_2(t_calcul *calcul, int fd, int tmp, char *line)
 	{
 		j = 0;
 		while (calcul->read[calcul->start][j] &&
-		calcul->read[calcul->start][j] == ' ')
+		ft_is_space(calcul->read[calcul->start][j]) == 1)
 			j++;
 		if (calcul->read[calcul->start][j] == '1')
 			break ;

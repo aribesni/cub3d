@@ -15,8 +15,8 @@
 void		ft_init(t_calcul *calcul)
 {
 	ft_bzero(calcul, sizeof(t_calcul));
-	calcul->movSpeed = 0.15;
-	calcul->rotSpeed = 0.5;
+	calcul->movspeed = 0.15;
+	calcul->rotspeed = 0.5;
 	calcul->up = 0;
 	calcul->down = 0;
 	calcul->left = 0;
@@ -81,9 +81,17 @@ int			ft_file_error(t_calcul *calcul, int i, int j)
 {
 	while (calcul->read[i][j])
 	{
-		if (calcul->read[i][j] != ' ')
+		if (ft_is_space(calcul->read[i][j]) == 0)
 			return (0);
 		j++;
 	}
 	return (1);
+}
+
+int			ft_is_space(char c)
+{
+	if (c == ' ' || c == '\t' ||
+		c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	return (0);
 }

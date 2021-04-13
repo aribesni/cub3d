@@ -17,72 +17,72 @@ static void		ft_rotate(t_calcul *calcul, double rotate)
 	double		dir;
 	double		plane;
 
-	dir = calcul->dirX;
-	plane = calcul->planeX;
-	calcul->dirX = calcul->dirX * cos(rotate * 0.1)
-		- calcul->dirY * sin(rotate * 0.1);
-	calcul->dirY = dir * sin(rotate * 0.1)
-		+ calcul->dirY * cos(rotate * 0.1);
-	calcul->planeX = calcul->planeX * cos(rotate * 0.1)
-		- calcul->planeY * sin(rotate * 0.1);
-	calcul->planeY = plane * sin(rotate * 0.1)
-		+ calcul->planeY * cos(rotate * 0.1);
+	dir = calcul->dir_x;
+	plane = calcul->plane_x;
+	calcul->dir_x = calcul->dir_x * cos(rotate * 0.1)
+		- calcul->dir_y * sin(rotate * 0.1);
+	calcul->dir_y = dir * sin(rotate * 0.1)
+		+ calcul->dir_y * cos(rotate * 0.1);
+	calcul->plane_x = calcul->plane_x * cos(rotate * 0.1)
+		- calcul->plane_y * sin(rotate * 0.1);
+	calcul->plane_y = plane * sin(rotate * 0.1)
+		+ calcul->plane_y * cos(rotate * 0.1);
 }
 
 static void		ft_left_right(t_calcul *calcul)
 {
-	if (calcul->right == true)
+	if (calcul->right == TRUE)
 	{
-		if (calcul->map[(int)(calcul->posY - calcul->dirX *
-			calcul->movSpeed)][(int)calcul->posX] == '0')
-			calcul->posY += -calcul->dirX * calcul->movSpeed;
-		if (calcul->map[(int)calcul->posY][(int)(calcul->posX +
-			calcul->dirY * calcul->movSpeed)] == '0')
-			calcul->posX += calcul->dirY * calcul->movSpeed;
+		if (calcul->map[(int)(calcul->pos_y - calcul->dir_x *
+			calcul->movspeed)][(int)calcul->pos_x] == '0')
+			calcul->pos_y += -calcul->dir_x * calcul->movspeed;
+		if (calcul->map[(int)calcul->pos_y][(int)(calcul->pos_x +
+			calcul->dir_y * calcul->movspeed)] == '0')
+			calcul->pos_x += calcul->dir_y * calcul->movspeed;
 	}
-	if (calcul->left == true)
+	if (calcul->left == TRUE)
 	{
-		if (calcul->map[(int)(calcul->posY + calcul->dirX *
-			calcul->movSpeed)][(int)calcul->posX] == '0')
-			calcul->posY -= -calcul->dirX * calcul->movSpeed;
-		if (calcul->map[(int)calcul->posY][(int)(calcul->posX -
-			calcul->dirY * calcul->movSpeed)] == '0')
-			calcul->posX -= calcul->dirY * calcul->movSpeed;
+		if (calcul->map[(int)(calcul->pos_y + calcul->dir_x *
+			calcul->movspeed)][(int)calcul->pos_x] == '0')
+			calcul->pos_y -= -calcul->dir_x * calcul->movspeed;
+		if (calcul->map[(int)calcul->pos_y][(int)(calcul->pos_x -
+			calcul->dir_y * calcul->movspeed)] == '0')
+			calcul->pos_x -= calcul->dir_y * calcul->movspeed;
 	}
 }
 
 static void		ft_up_down(t_calcul *calcul)
 {
-	if (calcul->up == true)
+	if (calcul->up == TRUE)
 	{
-		if (calcul->map[(int)calcul->posY][(int)(calcul->posX +
-			calcul->dirX * calcul->movSpeed)] == '0')
-			calcul->posX += calcul->dirX * calcul->movSpeed;
-		if (calcul->map[(int)(calcul->posY + calcul->dirY *
-			calcul->movSpeed)][(int)calcul->posX] == '0')
-			calcul->posY += calcul->dirY * calcul->movSpeed;
+		if (calcul->map[(int)calcul->pos_y][(int)(calcul->pos_x +
+			calcul->dir_x * calcul->movspeed)] == '0')
+			calcul->pos_x += calcul->dir_x * calcul->movspeed;
+		if (calcul->map[(int)(calcul->pos_y + calcul->dir_y *
+			calcul->movspeed)][(int)calcul->pos_x] == '0')
+			calcul->pos_y += calcul->dir_y * calcul->movspeed;
 	}
-	if (calcul->down == true)
+	if (calcul->down == TRUE)
 	{
-		if (calcul->map[(int)calcul->posY][(int)(calcul->posX -
-			calcul->dirX * calcul->movSpeed)] == '0')
-			calcul->posX -= calcul->dirX * calcul->movSpeed;
-		if (calcul->map[(int)(calcul->posY - calcul->dirY *
-			calcul->movSpeed)][(int)calcul->posX] == '0')
-			calcul->posY -= calcul->dirY * calcul->movSpeed;
+		if (calcul->map[(int)calcul->pos_y][(int)(calcul->pos_x -
+			calcul->dir_x * calcul->movspeed)] == '0')
+			calcul->pos_x -= calcul->dir_x * calcul->movspeed;
+		if (calcul->map[(int)(calcul->pos_y - calcul->dir_y *
+			calcul->movspeed)][(int)calcul->pos_x] == '0')
+			calcul->pos_y -= calcul->dir_y * calcul->movspeed;
 	}
 }
 
 void			ft_move(t_calcul *calcul)
 {
-	if (calcul->up == true || calcul->down == true)
+	if (calcul->up == TRUE || calcul->down == TRUE)
 		ft_up_down(calcul);
-	if (calcul->right == true || calcul->left == true)
+	if (calcul->right == TRUE || calcul->left == TRUE)
 		ft_left_right(calcul);
-	if (calcul->rt_left == true)
-		ft_rotate(calcul, calcul->rotSpeed);
-	if (calcul->rt_right == true)
-		ft_rotate(calcul, -calcul->rotSpeed);
+	if (calcul->rt_left == TRUE)
+		ft_rotate(calcul, calcul->rotspeed);
+	if (calcul->rt_right == TRUE)
+		ft_rotate(calcul, -calcul->rotspeed);
 }
 
 int				ft_run(t_calcul *calcul)

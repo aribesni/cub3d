@@ -67,13 +67,13 @@ void		ft_free(t_calcul *calcul)
 {
 	if (calcul->map)
 	{
-		ft_free_tab(calcul->map, calcul->mapH + 1);
+		ft_free_tab(calcul->map, calcul->map_h + 1);
 		calcul->map = NULL;
 	}
-	if (calcul->ZBuffer)
+	if (calcul->zbuffer)
 	{
-		free(calcul->ZBuffer);
-		calcul->ZBuffer = NULL;
+		free(calcul->zbuffer);
+		calcul->zbuffer = NULL;
 	}
 	ft_free_path(calcul);
 	ft_free_res(calcul);

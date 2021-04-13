@@ -15,87 +15,87 @@
 static void	ft_ray_size(t_calcul *calcul)
 {
 	if (calcul->side == 0)
-		calcul->perpWall = fabs((calcul->mapY - calcul->rayPosX +
-		(1 - calcul->stepX) / 2) / calcul->rayDirX);
+		calcul->perpwall = fabs((calcul->mapy - calcul->raypos_x +
+		(1 - calcul->stepx) / 2) / calcul->raydir_x);
 	else
-		calcul->perpWall = fabs((calcul->mapX - calcul->rayPosY +
-		(1 - calcul->stepY) / 2) / calcul->rayDirY);
-	calcul->lineH = fabs((calcul->h / calcul->perpWall));
-	calcul->drawStart = (-1 * (calcul->lineH)) / 2 + calcul->h / 2;
-	if (calcul->drawStart < 0)
-		calcul->drawStart = 0;
-	calcul->drawEnd = calcul->lineH / 2 + calcul->h / 2;
-	if (calcul->drawEnd >= calcul->h)
-		calcul->drawEnd = calcul->h - 1;
+		calcul->perpwall = fabs((calcul->mapx - calcul->raypos_y +
+		(1 - calcul->stepy) / 2) / calcul->raydir_y);
+	calcul->line_h = fabs((calcul->h / calcul->perpwall));
+	calcul->drawstart = (-1 * (calcul->line_h)) / 2 + calcul->h / 2;
+	if (calcul->drawstart < 0)
+		calcul->drawstart = 0;
+	calcul->drawend = calcul->line_h / 2 + calcul->h / 2;
+	if (calcul->drawend >= calcul->h)
+		calcul->drawend = calcul->h - 1;
 }
 
 static void	ft_hit(t_calcul *calcul)
 {
 	while (calcul->hit == 0)
 	{
-		if (calcul->sideDistX < calcul->sideDistY)
+		if (calcul->sidedist_x < calcul->sidedist_y)
 		{
-			calcul->sideDistX += calcul->deltaDistX;
-			calcul->mapY += calcul->stepX;
+			calcul->sidedist_x += calcul->deltadist_x;
+			calcul->mapy += calcul->stepx;
 			calcul->side = 0;
 		}
 		else
 		{
-			calcul->sideDistY += calcul->deltaDistY;
-			calcul->mapX += calcul->stepY;
+			calcul->sidedist_y += calcul->deltadist_y;
+			calcul->mapx += calcul->stepy;
 			calcul->side = 1;
 		}
-		if (calcul->map[calcul->mapX][calcul->mapY] != '0' &&
-			calcul->map[calcul->mapX][calcul->mapY] != '2' &&
-			calcul->map[calcul->mapX][calcul->mapY] != 'E' &&
-			calcul->map[calcul->mapX][calcul->mapY] != 'N' &&
-			calcul->map[calcul->mapX][calcul->mapY] != 'S' &&
-			calcul->map[calcul->mapX][calcul->mapY] != 'W')
+		if (calcul->map[calcul->mapx][calcul->mapy] != '0' &&
+			calcul->map[calcul->mapx][calcul->mapy] != '2' &&
+			calcul->map[calcul->mapx][calcul->mapy] != 'E' &&
+			calcul->map[calcul->mapx][calcul->mapy] != 'N' &&
+			calcul->map[calcul->mapx][calcul->mapy] != 'S' &&
+			calcul->map[calcul->mapx][calcul->mapy] != 'W')
 			calcul->hit = 1;
 	}
 }
 
 static void	ft_ray_direction(t_calcul *calcul)
 {
-	if (calcul->rayDirX < 0)
+	if (calcul->raydir_x < 0)
 	{
-		calcul->stepX = -1;
-		calcul->sideDistX = (calcul->rayPosX - calcul->mapY) *
-		calcul->deltaDistX;
+		calcul->stepx = -1;
+		calcul->sidedist_x = (calcul->raypos_x - calcul->mapy) *
+		calcul->deltadist_x;
 	}
 	else
 	{
-		calcul->stepX = 1;
-		calcul->sideDistX = (calcul->mapY + 1.0 - calcul->rayPosX) *
-		calcul->deltaDistX;
+		calcul->stepx = 1;
+		calcul->sidedist_x = (calcul->mapy + 1.0 - calcul->raypos_x) *
+		calcul->deltadist_x;
 	}
-	if (calcul->rayDirY < 0)
+	if (calcul->raydir_y < 0)
 	{
-		calcul->stepY = -1;
-		calcul->sideDistY = (calcul->rayPosY - calcul->mapX) *
-		calcul->deltaDistY;
+		calcul->stepy = -1;
+		calcul->sidedist_y = (calcul->raypos_y - calcul->mapx) *
+		calcul->deltadist_y;
 	}
 	else
 	{
-		calcul->stepY = 1;
-		calcul->sideDistY = (calcul->mapX + 1.0 - calcul->rayPosY) *
-		calcul->deltaDistY;
+		calcul->stepy = 1;
+		calcul->sidedist_y = (calcul->mapx + 1.0 - calcul->raypos_y) *
+		calcul->deltadist_y;
 	}
 }
 
 static void	ft_init_ray(t_calcul *calcul, int x)
 {
-	calcul->cameraX = 2 * x / (double)calcul->w - 1;
-	calcul->rayPosX = calcul->posX;
-	calcul->rayPosY = calcul->posY;
-	calcul->rayDirX = calcul->dirX + calcul->planeX * calcul->cameraX;
-	calcul->rayDirY = calcul->dirY + calcul->planeY * calcul->cameraX;
-	calcul->mapY = (int)calcul->rayPosX;
-	calcul->mapX = (int)calcul->rayPosY;
-	calcul->deltaDistX = sqrt(1 + (calcul->rayDirY * calcul->rayDirY) /
-	(calcul->rayDirX * calcul->rayDirX));
-	calcul->deltaDistY = sqrt(1 + (calcul->rayDirX * calcul->rayDirX) /
-	(calcul->rayDirY * calcul->rayDirY));
+	calcul->camera_x = 2 * x / (double)calcul->w - 1;
+	calcul->raypos_x = calcul->pos_x;
+	calcul->raypos_y = calcul->pos_y;
+	calcul->raydir_x = calcul->dir_x + calcul->plane_x * calcul->camera_x;
+	calcul->raydir_y = calcul->dir_y + calcul->plane_y * calcul->camera_x;
+	calcul->mapy = (int)calcul->raypos_x;
+	calcul->mapx = (int)calcul->raypos_y;
+	calcul->deltadist_x = sqrt(1 + (calcul->raydir_y * calcul->raydir_y) /
+	(calcul->raydir_x * calcul->raydir_x));
+	calcul->deltadist_y = sqrt(1 + (calcul->raydir_x * calcul->raydir_x) /
+	(calcul->raydir_y * calcul->raydir_y));
 	calcul->hit = 0;
 }
 
@@ -112,7 +112,7 @@ int			ft_calculate(t_calcul *calcul)
 		ft_ray_size(calcul);
 		ft_texture(calcul);
 		ft_disp_col(calcul, x);
-		calcul->ZBuffer[x] = calcul->perpWall;
+		calcul->zbuffer[x] = calcul->perpwall;
 		x++;
 	}
 	ft_init_sprite(calcul);

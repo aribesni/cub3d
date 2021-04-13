@@ -15,17 +15,17 @@
 static int	ft_key_press(int keycode, t_calcul *calcul)
 {
 	if (keycode == UP)
-		calcul->up = true;
+		calcul->up = TRUE;
 	if (keycode == DOWN)
-		calcul->down = true;
+		calcul->down = TRUE;
 	if (keycode == RIGHT)
-		calcul->right = true;
+		calcul->right = TRUE;
 	if (keycode == LEFT)
-		calcul->left = true;
+		calcul->left = TRUE;
 	if (keycode == RTL)
-		calcul->rt_left = true;
+		calcul->rt_left = TRUE;
 	if (keycode == RTR)
-		calcul->rt_right = true;
+		calcul->rt_right = TRUE;
 	if (keycode == ESC)
 		ft_escape(calcul);
 	return (1);
@@ -34,17 +34,17 @@ static int	ft_key_press(int keycode, t_calcul *calcul)
 static int	ft_key_release(int keycode, t_calcul *calcul)
 {
 	if (keycode == UP)
-		calcul->up = false;
+		calcul->up = FALSE;
 	if (keycode == DOWN)
-		calcul->down = false;
+		calcul->down = FALSE;
 	if (keycode == RIGHT)
-		calcul->right = false;
+		calcul->right = FALSE;
 	if (keycode == LEFT)
-		calcul->left = false;
+		calcul->left = FALSE;
 	if (keycode == RTL)
-		calcul->rt_left = false;
+		calcul->rt_left = FALSE;
 	if (keycode == RTR)
-		calcul->rt_right = false;
+		calcul->rt_right = FALSE;
 	return (1);
 }
 
@@ -77,7 +77,7 @@ static void	ft_key_events(t_calcul *calcul)
 	mlx_get_screen_size(calcul->mlx, &x, &y);
 	calcul->w = (calcul->w > x) ? x : calcul->w;
 	calcul->h = (calcul->h > y) ? y : calcul->h;
-	if (!(calcul->ZBuffer = malloc(sizeof(double) * calcul->w)))
+	if (!(calcul->zbuffer = malloc(sizeof(double) * calcul->w)))
 		return ;
 	if (calcul->save == 0)
 	{
@@ -96,13 +96,13 @@ void		ft_cub3d(t_calcul *calcul)
 {
 	int		first_display;
 
-	first_display = true;
+	first_display = TRUE;
 	calcul->w = ft_atoi(calcul->res_x);
 	calcul->h = ft_atoi(calcul->res_y);
-	if (calcul->up == true || calcul->down == true || calcul->left == true ||
-		calcul->right == true || first_display == true)
+	if (calcul->up == TRUE || calcul->down == TRUE || calcul->left == TRUE ||
+		calcul->right == TRUE || first_display == TRUE)
 	{
-		first_display = false;
+		first_display = FALSE;
 		ft_key_events(calcul);
 	}
 }
