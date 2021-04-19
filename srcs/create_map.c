@@ -6,7 +6,7 @@
 /*   By: aribesni <aribesni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:51:13 by aribesni          #+#    #+#             */
-/*   Updated: 2021/02/27 19:26:15 by aribesni         ###   ########.fr       */
+/*   Updated: 2021/04/14 14:53:11 by aribesni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ static void	ft_parse_map_3(t_calcul *calcul, int i, int j)
 			ft_free_map(calcul, i, "Error In Spawn Position");
 		calcul->map[i][j] = '0';
 		calcul->count_pos++;
+	}
+	if (calcul->read[calcul->start][j] == '1')
+	{
+		if ((i == 0 || calcul->read[calcul->start - 1][j] == '\0' ||
+		ft_is_space(calcul->read[calcul->start - 1][j]) == 1) &&
+		(j == 0 || calcul->read[calcul->start][j - 1] == '\0' ||
+		ft_is_space(calcul->read[calcul->start][j - 1]) == 1) &&
+		(j == calcul->size_max || calcul->read[calcul->start][j + 1] == '\0' ||
+		ft_is_space(calcul->read[calcul->start][j + 1]) == 1) &&
+		(i == calcul->count - 1 ||
+		calcul->read[calcul->start + 1][j] == '\0' ||
+		ft_is_space(calcul->read[calcul->start + 1][j]) == 1))
+			ft_free_map(calcul, i, "Invalid Space In Map");
 	}
 }
 
@@ -118,6 +131,8 @@ int			ft_create_map(t_calcul *calcul)
 	if (!(calcul->map = (char**)malloc(sizeof(char*) * calcul->count)))
 		return (-1);
 	ft_fill_map(calcul, i, j);
+	if (calcul->count_pos == 0)
+		ft_free_map(calcul, calcul->count - 1, "Error In Spawn Position");
 	ft_free_tab(calcul->read, size);
 	ft_cub3d(calcul);
 	return (0);

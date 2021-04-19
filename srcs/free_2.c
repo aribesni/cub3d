@@ -6,7 +6,7 @@
 /*   By: aribesni <aribesni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:59:25 by aribesni          #+#    #+#             */
-/*   Updated: 2021/03/28 14:59:28 by aribesni         ###   ########.fr       */
+/*   Updated: 2021/04/13 16:05:12 by aribesni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		ft_free_get_path(t_calcul *calcul, char *path, char *str)
 {
-	ft_free_tab(calcul->read, calcul->read_h);
+	ft_free_tab(calcul->read, calcul->count);
 	ft_free_res(calcul);
 	free(path);
 	ft_exit(str);
@@ -35,7 +35,7 @@ void		ft_free_tab(char **tab, int size)
 
 void		ft_free_info(t_calcul *calcul, char *str)
 {
-	ft_free_tab(calcul->read, calcul->read_h);
+	ft_free_tab(calcul->read, calcul->count);
 	ft_free(calcul);
 	ft_exit(str);
 }

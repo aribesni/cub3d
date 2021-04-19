@@ -6,7 +6,7 @@
 /*   By: aribesni <aribesni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:48:38 by aribesni          #+#    #+#             */
-/*   Updated: 2021/04/08 15:11:59 by aribesni         ###   ########.fr       */
+/*   Updated: 2021/04/13 10:57:48 by aribesni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,6 @@
 #  define RTL 65361
 #  define RTR 65363
 #  define ESC 65307
-#  define KEYPRESS 2
-#  define KEYRELEASE 3
-#  define KEYPRESSMASK (1L << 0)
-#  define KEYRELEASEMASK (1L << 1)
-#  define EXITPRESS 33
-#  define EXITMASK (1L << 17)
 
 # else
 
@@ -220,7 +214,8 @@ void				ft_free_save(t_calcul *calcul);
 void				ft_free_sprite(t_calcul *calcul);
 void				ft_free_tex(t_calcul *calcul);
 void				ft_free_tab(char **tab, int size);
-void				ft_get_rgb(t_calcul *calcul, char *color, unsigned char *bit);
+void				ft_get_rgb(t_calcul *calcul, char *color,
+					unsigned char *bit);
 void				ft_init(t_calcul *calcul);
 void				ft_move(t_calcul *calcul);
 void				ft_set_color(t_image *image, unsigned int color,
@@ -238,7 +233,8 @@ int					ft_init_sprite(t_calcul *calcul);
 int					ft_is_space(char c);
 int					ft_run(t_calcul *calcul);
 int					ft_screenshot(t_calcul *calcul);
-char 				*ft_extract_info(t_calcul *calcul, int i, int *j, char *res);
+char				*ft_extract_info(t_calcul *calcul,
+					int i, int *j, char *res);
 char				*ft_get_path(t_calcul *calcul, int i, int j);
 char				*ft_get_res(t_calcul *calcul, int i, int *j);
 t_image				*ft_new_image(t_calcul *calcul);

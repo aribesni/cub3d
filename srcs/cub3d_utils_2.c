@@ -6,7 +6,7 @@
 /*   By: aribesni <aribesni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:12:46 by aribesni          #+#    #+#             */
-/*   Updated: 2021/03/24 17:08:32 by aribesni         ###   ########.fr       */
+/*   Updated: 2021/04/13 11:23:29 by aribesni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		ft_free_data(t_calcul *calcul, char *res, char *str)
 {
-	ft_free_tab(calcul->read, calcul->read_h);
+	ft_free_tab(calcul->read, calcul->count);
 	free(res);
 	ft_free(calcul);
 	ft_exit(str);

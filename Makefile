@@ -20,11 +20,11 @@ SRC = 		add_sprite.c create_map.c cub3d.c cub3d_utils.c \
 
 SRCS = 		$(addprefix ./srcs/, $(SRC))
 
-#CFLAG = 	-Wall -Wextra -Werror -I ${HEADER}
+CFLAG = 	-Wall -Wextra -Werror -I ${HEADER}
 
-CFLAG = 	-Wall -Wextra -Werror
+#CFLAG = 	-Wall -Wextra -Werror
 
-#HEADER = includes/cub.h
+HEADER = includes/cub.h
 
 OBJS =		${SRCS:.c=.o}
 
@@ -40,30 +40,30 @@ else
 	CC = gcc
 endif
 
-all: 		${NAME}
+#all: 		${NAME}
 
 L_DIR =		./libft/
 
-#all: 		libft minilibx ${NAME}
+all: 		libft minilibx ${NAME}
 
-${LIBS}:
-			make -C ${MLX_DIR}
-			make -C ${L_DIR}
-
-${NAME}:	${OBJS} ${LIBS}
-			${CC} ${CFLAG} -o ${NAME} ${OBJS} ${MLX_LNK} ${LIBS}
-
-.c.o:
-			${CC} ${CFLAG} -I ./includes/ -c $< -o $@
-
-#minilibx:
+#${LIBS}:
 #			make -C ${MLX_DIR}
-
-#libft:
 #			make -C ${L_DIR}
 
-#${NAME}:	${OBJS}
-#			${CC} ${CFLAG} ${MLX_LNK} ${SRCS} -L${MLX_DIR} -L${L_DIR} -o ${NAME}
+#${NAME}:	${OBJS} ${LIBS}
+#			${CC} ${CFLAG} -o ${NAME} ${OBJS} ${MLX_LNK} ${LIBS}
+
+#.c.o:
+#			${CC} ${CFLAG} -I ./includes/ -c $< -o $@
+
+minilibx:
+			make -C ${MLX_DIR}
+
+libft:
+			make -C ${L_DIR}
+
+${NAME}:	${OBJS}
+			${CC} ${CFLAG} ${MLX_LNK} ${SRCS} -L${MLX_DIR} -L${L_DIR} -o ${NAME}
 
 clean:
 			rm -f ${OBJS}

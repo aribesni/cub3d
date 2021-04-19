@@ -6,7 +6,7 @@
 /*   By: aribesni <aribesni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 18:40:19 by aribesni          #+#    #+#             */
-/*   Updated: 2021/03/07 09:43:38 by aribesni         ###   ########.fr       */
+/*   Updated: 2021/04/13 16:15:57 by aribesni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,12 @@ static void	ft_res(t_calcul *calcul, int i, int j)
 {
 	calcul->res_x = ft_get_res(calcul, i, &j);
 	calcul->res_y = ft_get_res(calcul, i, &j);
-	ft_file_error(calcul, i, j);
+	if (ft_file_error(calcul, i, j) == 0)
+	{
+		ft_free_tab(calcul->read, calcul->count);
+		ft_free(calcul);
+		ft_exit("Resolution Error");
+	}
 	calcul->count_res++;
 }
 

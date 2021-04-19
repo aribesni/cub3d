@@ -6,7 +6,7 @@
 /*   By: aribesni <aribesni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:54:41 by aribesni          #+#    #+#             */
-/*   Updated: 2021/02/27 21:28:17 by aribesni         ###   ########.fr       */
+/*   Updated: 2021/04/13 15:43:01 by aribesni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void		ft_get_rgb(t_calcul *calcul, char *color, unsigned char *bit)
 {
 	if (ft_atoi(color) < 0 || ft_atoi(color) > 255)
 	{
-		ft_free_tab(calcul->read, calcul->read_h);
+		free(color);
+		ft_free_tab(calcul->read, calcul->count);
 		ft_free(calcul);
 		ft_exit("Color Error");
 	}
@@ -35,7 +36,7 @@ char		*ft_get_res(t_calcul *calcul, int i, int *j)
 	if (!(res = (char*)malloc(sizeof(char) * size + 1)))
 		return (NULL);
 	temp += (*j == 0) ? 1 : 0;
-	*j = *j + 1;
+	*j = (temp == 1) ? *j + 1 : *j;
 	if (temp == 1 && ft_is_space(calcul->read[i][*j]) == 0)
 		ft_free_data(calcul, res, "Resolution Error");
 	while (ft_is_space(calcul->read[i][*j]) == 1)
@@ -58,7 +59,7 @@ static char	*ft_get_color(t_calcul *calcul, int i, int *j)
 	if (!(res = (char*)malloc(sizeof(char) * size + 1)))
 		return (NULL);
 	temp += (*j == 0) ? 1 : 0;
-	*j = *j + 1;
+	*j = (temp == 1) ? *j + 1 : *j;
 	if (temp == 1 && ft_is_space(calcul->read[i][*j]) == 0)
 		ft_free_data(calcul, res, "Color Error");
 	while (ft_is_space(calcul->read[i][*j]) == 1 || calcul->read[i][*j] == ',')
@@ -67,7 +68,7 @@ static char	*ft_get_color(t_calcul *calcul, int i, int *j)
 			comma++;
 		*j = *j + 1;
 	}
-	if ((temp == 0 && comma > 1) || (temp == 1 && comma > 0))
+	if ((temp == 0 && comma != 1) || (temp == 1 && comma > 0))
 		ft_free_data(calcul, res, "Color Error");
 	return (ft_extract_info(calcul, i, j, res));
 }
@@ -82,7 +83,7 @@ void		ft_floor_ceiling(t_calcul *calcul, int i, int j, char c)
 	ft_get_rgb(calcul, calcul->color_temp, &calcul->bit_3);
 	if (ft_file_error(calcul, i, j) == 0)
 	{
-		ft_free_tab(calcul->read, calcul->read_h);
+		ft_free_tab(calcul->read, calcul->count);
 		ft_free(calcul);
 		ft_exit("Color Error");
 	}

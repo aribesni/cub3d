@@ -45,11 +45,19 @@ int			ft_check_path(char *path)
 {
 	int		fd;
 	int		i;
+	int		ret;
+	char	c;
 
 	i = ft_strlen(path);
 	fd = open(path, O_RDONLY);
 	if (fd == -1 || (path[i - 1] != 'm' && path[i - 2] != 'p' &&
 		path[i - 3] != 'x' && path[i - 4] != '.'))
+	{
+		close(fd);
+		return (0);
+	}
+	ret = read(fd, &c, i);
+	if (ret < 0)
 	{
 		close(fd);
 		return (0);
@@ -68,7 +76,7 @@ void		ft_arg(t_calcul *calcul, int argc, char **argv)
 	{
 		if (argc > 3)
 			ft_exit("Too many arguments");
-		if (ft_strcmp(argv[2], "-save") == 0)
+		if (ft_strcmp(argv[2], "--save") == 0)
 			calcul->save = 1;
 		else
 			ft_exit("Invalid Argument");

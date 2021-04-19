@@ -6,7 +6,7 @@
 /*   By: aribesni <aribesni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 18:51:34 by aribesni          #+#    #+#             */
-/*   Updated: 2021/02/27 18:51:39 by aribesni         ###   ########.fr       */
+/*   Updated: 2021/04/13 10:54:39 by aribesni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,27 @@ static void	ft_init_img(t_calcul *calcul)
 
 static void	ft_key_events(t_calcul *calcul)
 {
-	int		x;
+/*	int		x;
 	int		y;
 
 	x = 0;
 	y = 0;
-	if (!(calcul->mlx = mlx_init()))
+*/	if (!(calcul->mlx = mlx_init()))
 		return ;
-	mlx_get_screen_size(calcul->mlx, &x, &y);
+/*	mlx_get_screen_size(calcul->mlx, &x, &y);
 	calcul->w = (calcul->w > x) ? x : calcul->w;
 	calcul->h = (calcul->h > y) ? y : calcul->h;
-	if (!(calcul->zbuffer = malloc(sizeof(double) * calcul->w)))
+*/	if (!(calcul->zbuffer = malloc(sizeof(double) * calcul->w)))
 		return ;
 	if (calcul->save == 0)
 	{
 		if (!(calcul->win = mlx_new_window(calcul->mlx, calcul->w,
 		calcul->h, "Cub3D")))
 			return ;
-		mlx_hook(calcul->win, KEYPRESS, KEYPRESSMASK, ft_key_press, calcul);
-		mlx_hook(calcul->win, KEYRELEASE, KEYRELEASEMASK, ft_key_release,
+		mlx_hook(calcul->win, 2, (1L << 0), ft_key_press, calcul);
+		mlx_hook(calcul->win, 3, (1L << 1), ft_key_release,
 		calcul);
-		mlx_hook(calcul->win, EXITPRESS, EXITMASK, ft_escape, calcul);
+		mlx_hook(calcul->win, 33, (1L << 17), ft_escape, calcul);
 	}
 	ft_init_img(calcul);
 }
